@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:openrooms/hourly_occupancy.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   CupertinoPageRoute<void>(
                     builder: (BuildContext context) {
-                      return const _SecondPage(text: 'Room 1 Data');
+                      return const HourlyOccupancy();
                     },
                   ),
                 ),
@@ -81,7 +82,7 @@ class HomePage extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   CupertinoPageRoute<void>(
                     builder: (BuildContext context) {
-                      return const _SecondPage(text: 'Room 3 Data');
+                      return const HourlyOccupancy();
                     },
                   ),
                 ),
