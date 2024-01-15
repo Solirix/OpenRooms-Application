@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
     // CupertinoPageScaffold provides a basic structure for a page
     return CupertinoPageScaffold(
       // CupertinoNavigationBar is the top navigation bar
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         middle: Text('Settings'), // Display 'Settings' in the middle of the navigation bar
       ),
       // SafeArea ensures content is displayed within safe areas on the screen
@@ -27,7 +27,7 @@ class SettingsPage extends StatelessWidget {
                 title,
                 style: const TextStyle(fontSize: 48),
               ),
-              SizedBox(height: 20), // Spacer between the title and buttons
+              const SizedBox(height: 20), // Spacer between the title and buttons
 
               // Row widget organizes children in a horizontal row
               Row(
@@ -35,14 +35,14 @@ class SettingsPage extends StatelessWidget {
                 children: [
 
                   CupertinoButton(
-                    child: Text('Light Mode'),
+                    child: const Text('Light Mode'),
                     onPressed: () {
                       // Handle the action when Button 1 is pressed
                       print('Button 1 pressed');
                     },
                   ),
                   CupertinoButton(
-                    child: Text('Dark Mode'),
+                    child: const Text('Dark Mode'),
                     onPressed: () {
                       // Handle the action when Button 2 is pressed
                       print('Button 2 pressed');

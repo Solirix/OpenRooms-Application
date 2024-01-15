@@ -26,7 +26,7 @@ class CupertinoTabBarBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(items: [
+        tabBar: CupertinoTabBar(items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.house_fill),
             //label: 'Home',
