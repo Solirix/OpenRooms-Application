@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:openrooms/disclaimer.dart';
 import 'package:openrooms/hourly_occupancy.dart';
 
 class HomePage extends StatelessWidget {
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   CupertinoPageRoute<void>(
                     builder: (BuildContext context) {
-                      return const HourlyOccupancy();
+                      return const DisclaimerPage();
                     },
                   ),
                 ),
