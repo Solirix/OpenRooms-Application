@@ -3,13 +3,21 @@ import 'package:openrooms/home.dart'; //importing home page
 import 'package:openrooms/map.dart'; //importing map page
 import 'package:openrooms/settings.dart'; //importing settings page
 import 'package:openrooms/disclaimer.dart'; //importing disclaimer page
+import 'package:openrooms/themeProvider.dart';
+import 'package:provider/provider.dart';
 
 // Cupertino is iOS styling. Look up flutter cupertino there's a lot of docs.
 /// Flutter code sample for [CupertinoTabBar].
 ///
 const String initialRoute = '/disclaimer';
 
-void main() => runApp(const OpenRooms());
+void main() => runApp(
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        child: const OpenRooms(),
+      ),
+    );
+
 
 // class OpenRooms extends StatelessWidget {
 //   const OpenRooms({super.key});
@@ -30,7 +38,8 @@ class OpenRooms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      theme: const CupertinoThemeData(brightness: Brightness.light),
+      // theme: const CupertinoThemeData(brightness: Brightness.light),
+      theme: Provider.of<ThemeProvider>(context).getCupertinoTheme(),
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case '/home':

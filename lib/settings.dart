@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:openrooms/themeProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
   final String title;
@@ -38,14 +41,18 @@ class SettingsPage extends StatelessWidget {
                     child: const Text('Light Mode'),
                     onPressed: () {
                       // Handle the action when Button 1 is pressed
-                      print('Button 1 pressed');
+                      // Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                          Provider.of<ThemeProvider>(context, listen: false).toggleTheme(ThemeMode.light);
+                      print('Light Mode Pressed');
                     },
                   ),
                   CupertinoButton(
                     child: const Text('Dark Mode'),
                     onPressed: () {
                       // Handle the action when Button 2 is pressed
-                      print('Button 2 pressed');
+                      // Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                          Provider.of<ThemeProvider>(context, listen: false).toggleTheme(ThemeMode.dark);
+                      print('Dark Mode Pressed');
                     },
                   ),
                 ],

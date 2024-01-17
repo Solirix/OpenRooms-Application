@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.19.0
   shared_preferences: ^2.2.2
+  provider: ^5.0.0 #Adds the Provider package for themes.
+
 
 dev_dependencies:
   flutter_test:
