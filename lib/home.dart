@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   CupertinoPageRoute<void>(
                     builder: (BuildContext context) {
-                      return const DisclaimerPage();
+                      return const HourlyOccupancy();
                     },
                   ),
                 ),
