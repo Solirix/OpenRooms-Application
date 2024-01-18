@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:openrooms/disclaimer.dart';
 import 'package:openrooms/hourly_occupancy.dart';
 
 class HomePage extends StatelessWidget {
