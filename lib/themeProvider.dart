@@ -43,7 +43,7 @@ class ThemeProvider extends ChangeNotifier {
   final ThemeData darkTheme = ThemeData.dark();
 
   // Light theme for CupertinoThemeData.
-  final CupertinoThemeData lightCupertinoTheme = CupertinoThemeData(
+  static const CupertinoThemeData lightCupertinoTheme = CupertinoThemeData(
     brightness: Brightness.light,
     primaryColor: CupertinoColors.systemBlue,
     primaryContrastingColor: CupertinoColors.white,
@@ -58,7 +58,7 @@ class ThemeProvider extends ChangeNotifier {
   );
 
   // Dark theme for CupertinoThemeData.
-  final CupertinoThemeData darkCupertinoTheme = CupertinoThemeData(
+  static const CupertinoThemeData darkCupertinoTheme = CupertinoThemeData(
     brightness: Brightness.dark,
     primaryColor: CupertinoColors.systemBlue,
     primaryContrastingColor: CupertinoColors.white,
