@@ -1,35 +1,30 @@
-import 'package:flutter/cupertino.dart'; //iOS styling
-import 'package:openrooms/home.dart'; //importing home page
-import 'package:openrooms/map.dart'; //importing map page
-import 'package:openrooms/settings.dart'; //importing settings page
-import 'package:openrooms/disclaimer.dart'; //importing disclaimer page
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:openrooms/home.dart';
+import 'package:openrooms/map.dart';
+import 'package:openrooms/settings.dart';
+import 'package:openrooms/disclaimer.dart';
 import 'package:openrooms/themeProvider.dart';
 import 'package:provider/provider.dart';
 
-// Cupertino is iOS styling. Look up flutter cupertino there's a lot of docs.
-/// Flutter code sample for [CupertinoTabBar].
-///
 const String initialRoute = '/disclaimer';
 
-void main() => runApp(
-      ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
-        child: const OpenRooms(),
-      ),
-    );
+void main() async {
+  // Ensure that Flutter bindings are initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Load the saved theme before runApp
+  final themeProvider = ThemeProvider();
+  await themeProvider.loadSavedTheme(); // Use the loadSavedTheme method to load the saved theme settings
 
-// class OpenRooms extends StatelessWidget {
-//   const OpenRooms({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const CupertinoApp(
-//       //can change this to dark for dark mode it looks like
-//       theme: CupertinoThemeData(brightness: Brightness.light),
-//       home: DisclaimerPage(), //make this
-//     );
-//   }
-// }
+  // Run the app, providing the ThemeProvider to the widget tree
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => themeProvider,
+      child: const OpenRooms(),
+    ),
+  );
+}
 
 class OpenRooms extends StatelessWidget {
   const OpenRooms({Key? key}) : super(key: key);
@@ -37,7 +32,6 @@ class OpenRooms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      // theme: const CupertinoThemeData(brightness: Brightness.light),
       theme: Provider.of<ThemeProvider>(context).getCupertinoTheme(),
       onGenerateRoute: (settings) {
         switch (settings.name) {
@@ -54,22 +48,19 @@ class OpenRooms extends StatelessWidget {
 }
 
 class CupertinoTabBarBottom extends StatelessWidget {
-  const CupertinoTabBarBottom({super.key});
+  const CupertinoTabBarBottom({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CupertinoTabScaffold(
         tabBar: CupertinoTabBar(items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.house_fill),
-            //label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.map_fill),
-            //label: 'Map',
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.gear_alt_fill),
-            //label: 'Settings',
           ),
         ]),
         tabBuilder: (context, index) {

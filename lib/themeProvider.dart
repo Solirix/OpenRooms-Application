@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ThemeProvider class manages the app's theme and provides methods to toggle between light and dark modes.
 class ThemeProvider extends ChangeNotifier {
@@ -10,7 +11,7 @@ class ThemeProvider extends ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
 
   // Method to toggle between light and dark modes based on the provided ThemeMode.
-  void toggleTheme(ThemeMode mode) {
+  void toggleTheme(ThemeMode mode) async {
     switch (mode) {
       case ThemeMode.light:
         _isDarkMode = false; // Set to light mode.
@@ -25,6 +26,8 @@ class ThemeProvider extends ChangeNotifier {
       default:
         break;
     }
+    //save the theme
+    await saveTheme(mode);
     // Notify listeners about the theme change.
     notifyListeners();
   }
@@ -79,4 +82,18 @@ class ThemeProvider extends ChangeNotifier {
   Brightness _getSystemBrightness() {
     return WidgetsBinding.instance.window.platformBrightness;
   }
+  // Method to save the selected theme mode to SharedPreferences
+Future<void> saveTheme(ThemeMode mode) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setInt('themeMode', mode.index); // Save the index of the selected ThemeMode
+}
+
+// Method to load the saved theme mode from SharedPreferences
+Future<void> loadSavedTheme() async {
+  final prefs = await SharedPreferences.getInstance();
+  final themeIndex = prefs.getInt('themeMode'); // Retrieve the saved theme index
+  if (themeIndex != null) {
+    toggleTheme(ThemeMode.values[themeIndex]); // Toggle the theme based on the saved index
+  }
+}
 }

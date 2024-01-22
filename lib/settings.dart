@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:openrooms/themeProvider.dart'; // Assuming this file contains the ThemeProvider class
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Define a StatelessWidget for the SettingsPage
 class SettingsPage extends StatelessWidget {
@@ -84,4 +85,15 @@ class SettingsPage extends StatelessWidget {
       // Use 1 for light mode if the platformBrightness is light, otherwise, use 0 for system mode
     }
   }
+
+  // Future method to get the saved theme mode from SharedPreferences
+Future<ThemeMode> getSavedTheme() async {
+  final prefs = await SharedPreferences.getInstance();
+  final themeIndex = prefs.getInt('themeMode'); // Retrieve the saved theme index
+  if (themeIndex != null) {
+    return ThemeMode.values[themeIndex]; // Return the ThemeMode based on the saved index
+  } else {
+    return ThemeMode.system; // If no saved index, return system default as the default theme
+  }
+}
 }
