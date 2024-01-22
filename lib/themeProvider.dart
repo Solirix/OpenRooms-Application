@@ -77,6 +77,6 @@ class ThemeProvider extends ChangeNotifier {
 
   // Helper method to get the system brightness
   Brightness _getSystemBrightness() {
-    return WidgetsBinding.instance?.window.platformBrightness ?? Brightness.light;
+    return WidgetsBinding.instance.window.platformBrightness;
   }
 }
