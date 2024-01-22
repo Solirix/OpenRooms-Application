@@ -11,13 +11,16 @@ class ThemeProvider extends ChangeNotifier {
 
   // Method to toggle between light and dark modes based on the provided ThemeMode.
   void toggleTheme(ThemeMode mode) {
-    // Switch statement to handle different ThemeModes.
     switch (mode) {
       case ThemeMode.light:
         _isDarkMode = false; // Set to light mode.
         break;
       case ThemeMode.dark:
         _isDarkMode = true; // Set to dark mode.
+        break;
+      case ThemeMode.system:
+        // Introduce a new method to handle the system default theme
+        _isDarkMode = _getSystemBrightness() == Brightness.dark;
         break;
       default:
         break;
@@ -71,4 +74,9 @@ class ThemeProvider extends ChangeNotifier {
       ),
     ),
   );
+
+  // Helper method to get the system brightness
+  Brightness _getSystemBrightness() {
+    return WidgetsBinding.instance?.window.platformBrightness ?? Brightness.light;
+  }
 }
