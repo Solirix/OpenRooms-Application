@@ -1,8 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/themeProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter bindings are initialized
+  SharedPreferences.setMockInitialValues({});
+
   test('Toggle theme should switch between light and dark mode', () {
     final themeProvider = ThemeProvider();
 
@@ -16,5 +20,41 @@ void main() {
     // Toggle back to light mode
     themeProvider.toggleTheme(ThemeMode.light);
     expect(themeProvider.isDarkMode, false);
+  });
+
+  test('Save and load theme should work correctly', () async {
+    final themeProvider = ThemeProvider();
+
+    // Save the theme
+    await themeProvider.saveTheme(ThemeMode.dark);
+
+    // Load the saved theme
+    await themeProvider.loadSavedTheme();
+
+    // Ensure that the loaded theme matches the saved theme
+    expect(themeProvider.isDarkMode, true);
+  });
+
+  test('Get saved theme with no saved theme should return system', () async {
+    final themeProvider = ThemeProvider();
+
+    // Get the saved theme
+    final savedTheme = await themeProvider.getSavedTheme();
+
+    // Ensure that the default system theme is returned
+    expect(savedTheme, ThemeMode.system);
+  });
+
+  test('Get saved theme with a saved theme should return the saved theme', () async {
+    final themeProvider = ThemeProvider();
+
+    // Save a theme
+    await themeProvider.saveTheme(ThemeMode.light);
+
+    // Get the saved theme
+    final savedTheme = await themeProvider.getSavedTheme();
+
+    // Ensure that the saved theme is returned
+    expect(savedTheme, ThemeMode.light);
   });
 }
