@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:openrooms/themeProvider.dart'; // Assuming this file contains the ThemeProvider class
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Define a StatelessWidget for the SettingsPage
 class SettingsPage extends StatelessWidget {
