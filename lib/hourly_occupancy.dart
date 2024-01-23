@@ -21,7 +21,7 @@ class _HourlyOccupancy extends State<HourlyOccupancy> {
         child: SafeArea(
           child: Padding(
             padding:
-                const EdgeInsets.only(top: 30), // Adjust top padding as needed
+                const EdgeInsets.only(top: 30), //Adjust top padding as needed
             child: Column(
               children: [
                 Row(
@@ -33,13 +33,13 @@ class _HourlyOccupancy extends State<HourlyOccupancy> {
                         : selectedDate.toString()),
                     CupertinoButton(
                       padding:
-                          const EdgeInsets.only(left: 10), // Optional spacing
+                          const EdgeInsets.only(left: 10), //Optional spacing
                       onPressed: () => showDatePopup(context),
                       child: const Icon(CupertinoIcons.calendar),
                     ),
                   ],
                 ),
-                // ... rest of your page content
+                //rest of page content
               ],
             ),
           ),
@@ -50,7 +50,6 @@ class _HourlyOccupancy extends State<HourlyOccupancy> {
     return showCupertinoModalPopup<DateTime>(
       context: context,
       builder: (context) => Container(
-        // ... your existing container code
         child: CupertinoDatePicker(
           mode: CupertinoDatePickerMode.date,
           onDateTimeChanged: (selectedDateTime) {
@@ -58,7 +57,7 @@ class _HourlyOccupancy extends State<HourlyOccupancy> {
               selectedDate = selectedDateTime;
             });
           },
-          // ... other date picker customizations
+          //other date picker customizations
         ),
       ),
     );
