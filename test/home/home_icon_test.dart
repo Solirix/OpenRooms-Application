@@ -10,10 +10,18 @@ void main() {
       home: CupertinoTabBarBottom(),
     ));
 
-    // find the home icon and tap it
+    //find the home icon and tap it
     await tester.tap(find.byIcon(CupertinoIcons.house_fill));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
+    // find the text "Room 1" and tap it
+    await tester.tap(find.text('Room 1'));
+    await tester.pumpAndSettle();
+
+    // find the back button and tap it
+    await tester.tap(find.byType(CupertinoNavigationBarBackButton));
+    await tester.pumpAndSettle();
+    
     // expect to find the home page, with some text that is on it (Home, Room 1)
     expect(find.byType(HomePage), findsOneWidget);
     expect(find.text('Home'), findsOneWidget);

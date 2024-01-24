@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart'; //needed to customize the date picker
 
 class HourlyOccupancy extends StatefulWidget {
   const HourlyOccupancy({super.key});
