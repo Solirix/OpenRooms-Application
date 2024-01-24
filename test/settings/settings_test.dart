@@ -16,18 +16,16 @@ void main() {
       ),
     );
 
-    // Verify that the light mode button is present.
-    expect(find.text('Light Mode'), findsOneWidget);
-
-    // Verify that the dark mode button is present.
-    expect(find.text('Dark Mode'), findsOneWidget);
-
-    // Perform a tap on the Light Mode button.
-    await tester.tap(find.text('Light Mode'));
+    // Perform a tap on the System button (value 0).
+    await tester.tap(find.text('System'));
     await tester.pump();
 
-    // Perform a tap on the Dark Mode button.
-    await tester.tap(find.text('Dark Mode'));
+    // Perform a tap on the Light button (value 1).
+    await tester.tap(find.text('Light'));
+    await tester.pump();
+
+    // Perform a tap on the Dark button (value 2).
+    await tester.tap(find.text('Dark'));
     await tester.pump();
   });
 }

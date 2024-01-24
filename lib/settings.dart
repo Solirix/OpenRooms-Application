@@ -48,17 +48,14 @@ class SettingsPage extends StatelessWidget {
                     case 0:
                       // Toggle to System mode
                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme(ThemeMode.system);
-                      print('System Pressed');
                       break;
                     case 1:
                       // Toggle to Light mode
                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme(ThemeMode.light);
-                      print('Light Pressed');
                       break;
                     case 2:
                       // Toggle to Dark mode
                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme(ThemeMode.dark);
-                      print('Dark Pressed');
                       break;
                   }
                 },
