@@ -70,15 +70,17 @@ class SettingsPage extends StatelessWidget {
   }
 
   // Method to determine the selected index based on the current theme mode
-  int _getGroupValue(BuildContext context) {
-    final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
-    
-    // If in Dark mode, return 2 (Dark mode index), else, use platformBrightness to determine Light (1) or System (0)
-    if (isDarkMode) {
+int _getGroupValue(BuildContext context) {
+  final themeMode = Provider.of<ThemeProvider>(context).getThemeMode();
+
+  // Return the corresponding index based on the current theme mode
+  switch (themeMode) {
+    case ThemeMode.system:
+      return 0; // System mode index
+    case ThemeMode.light:
+      return 1; // Light mode index
+    case ThemeMode.dark:
       return 2; // Dark mode index
-    } else {
-      return MediaQuery.of(context).platformBrightness == Brightness.light ? 1 : 0;
-      // Use 1 for light mode if the platformBrightness is light, otherwise, use 0 for system mode
-    }
   }
+}
 }
