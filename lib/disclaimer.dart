@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class DisclaimerPage extends StatelessWidget {
-  const DisclaimerPage({Key? key}) : super(key: key);
+  const DisclaimerPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,29 +1,32 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openrooms/disclaimer.dart';
-import 'package:openrooms/home.dart';
-import 'package:openrooms/main.dart';
+import 'package:openrooms/settings.dart';
+import 'package:provider/provider.dart';
+import 'package:openrooms/themeProvider.dart';
 
 void main() {
-  testWidgets('Agree button navigates to home page', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MaterialApp(
-      home: OpenRooms(),
-    ));
+  testWidgets('Find home icon and click it to go to home page', (tester) async {
+    // navigate to the tab widget
+    await tester.pumpWidget(
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(), // Provide the necessary provider
+        child: const CupertinoApp(
+          home: SettingsPage(title: 'Settings'),
+        ),
+      ),
+    );
 
-    // Navigate to the DisclaimerPage.
-    await tester.tap(find.text('I Agree'));
+    //find the dislcaimer text and tap it
+    await tester.tap(find.text('Legal Disclaimer'));
     await tester.pumpAndSettle();
 
-    // Verify that we are on the DisclaimerPage.
-    expect(find.byType(DisclaimerPage), findsOneWidget);
+    expect(find.byType(LegalDisclaimerPage), findsOneWidget);
 
-    // Tap on the Agree button.
-    await tester.tap(find.text('Agree'));
+    //tap the ok button
+    await tester.tap(find.text('Ok'));
     await tester.pumpAndSettle();
 
-    // Verify that we are on the home page.
-    expect(find.byType(CupertinoTabBarBottom), findsOneWidget);
+    // expect to find the settings page
+    expect(find.byType(SettingsPage), findsOneWidget);
   });
 }

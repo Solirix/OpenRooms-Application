@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:openrooms/home.dart';
 import 'package:openrooms/map.dart';
@@ -27,7 +26,7 @@ void main() async {
 }
 
 class OpenRooms extends StatelessWidget {
-  const OpenRooms({Key? key}) : super(key: key);
+  const OpenRooms({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class OpenRooms extends StatelessWidget {
 
 
 class CupertinoTabBarBottom extends StatelessWidget {
-  const CupertinoTabBarBottom({Key? key}) : super(key: key);
+  const CupertinoTabBarBottom({super.key});
 
   @override
   Widget build(BuildContext context) => CupertinoTabScaffold(

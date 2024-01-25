@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       ChangeNotifierProvider(
         create: (context) => ThemeProvider(), // Provide the necessary provider
-        child: CupertinoApp(
+        child: const CupertinoApp(
           home: SettingsPage(title: 'Settings'),
         ),
       ),

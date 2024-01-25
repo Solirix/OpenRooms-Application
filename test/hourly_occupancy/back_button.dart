@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:openrooms/main.dart';
 import 'package:openrooms/home.dart';
 import 'package:openrooms/hourly_occupancy.dart';
 
