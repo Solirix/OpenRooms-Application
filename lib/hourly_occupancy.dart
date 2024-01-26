@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; //needed to customize the date picker
 import 'package:table_calendar/table_calendar.dart';
+//import 'package:firebase_database/firebase_database.dart';
 
 class HourlyOccupancy extends StatefulWidget {
   const HourlyOccupancy({super.key});

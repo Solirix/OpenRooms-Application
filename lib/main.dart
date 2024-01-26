@@ -5,16 +5,21 @@ import 'package:openrooms/settings.dart';
 import 'package:openrooms/disclaimer.dart';
 import 'package:openrooms/themeProvider.dart';
 import 'package:provider/provider.dart';
-
-const String initialRoute = '/disclaimer';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   // Ensure that Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
-  
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   // Load the saved theme before runApp
   final themeProvider = ThemeProvider();
-  await themeProvider.loadSavedTheme(); // Use the loadSavedTheme method to load the saved theme settings
+  await themeProvider
+      .loadSavedTheme(); // Use the loadSavedTheme method to load the saved theme settings
 
   // Run the app, providing the ThemeProvider to the widget tree
   runApp(
@@ -37,15 +42,14 @@ class OpenRooms extends StatelessWidget {
           case '/home':
             return CupertinoPageRoute(
                 builder: (_) => const CupertinoTabBarBottom());
-          case '/disclaimer':
           default:
-            return CupertinoPageRoute(builder: (_) => const DisclaimerPage());
+            return CupertinoPageRoute(
+                builder: (_) => const CupertinoTabBarBottom());
         }
       },
     );
   }
 }
-
 
 class CupertinoTabBarBottom extends StatelessWidget {
   const CupertinoTabBarBottom({super.key});

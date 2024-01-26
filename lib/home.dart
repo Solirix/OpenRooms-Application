@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:openrooms/hourly_occupancy.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -87,20 +88,5 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ));
-  }
-}
-
-class _SecondPage extends StatelessWidget {
-  const _SecondPage({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: Center(
-        child: Text(text),
-      ),
-    );
   }
 }
