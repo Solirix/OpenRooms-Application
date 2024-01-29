@@ -93,7 +93,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Settings'),
+        middle: Text(
+          'Settings',
+          style: TextStyle(fontSize: 30),
+        ),
       ),
       child: SafeArea(
         child: Center(
