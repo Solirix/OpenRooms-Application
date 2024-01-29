@@ -11,9 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
-  String room1Value = '0';
-  String room2Value = '0';
-  String room3Value = '0';
+  String room1Value = 'null';
+  String room2Value = 'null';
+  String room3Value = 'null';
 
   late StreamSubscription<DatabaseEvent> _subscriptionRoom1;
   late StreamSubscription<DatabaseEvent> _subscriptionRoom2;
