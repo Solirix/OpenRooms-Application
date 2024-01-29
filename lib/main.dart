@@ -2,55 +2,46 @@ import 'package:flutter/cupertino.dart';
 import 'package:openrooms/home.dart';
 import 'package:openrooms/map.dart';
 import 'package:openrooms/settings.dart';
-import 'package:openrooms/disclaimer.dart';
 import 'package:openrooms/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  // Ensure that Flutter bindings are initialized
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Load the saved theme before runApp
   final themeProvider = ThemeProvider();
-  await themeProvider
-      .loadSavedTheme(); // Use the loadSavedTheme method to load the saved theme settings
+  await themeProvider.loadSavedTheme();
 
-  // Run the app, providing the ThemeProvider to the widget tree
   runApp(
     ChangeNotifierProvider(
       create: (context) => themeProvider,
-      child: const OpenRooms(),
+      child: const MyApp(), // Replace CupertinoApp with MyApp
     ),
   );
 }
 
-class OpenRooms extends StatelessWidget {
-  const OpenRooms({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return CupertinoApp(
-      theme: Provider.of<ThemeProvider>(context).getCupertinoTheme(),
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/home':
-            return CupertinoPageRoute(
-                builder: (_) => const CupertinoTabBarBottom());
-          default:
-            return CupertinoPageRoute(
-                builder: (_) => const CupertinoTabBarBottom());
-        }
-      },
+      debugShowCheckedModeBanner: false,
+      title: 'Open Rooms',
+      theme: themeProvider.getCupertinoTheme(), // Apply the theme
+      home: const CupertinoTabBarBottom(), // Your home widget
     );
   }
 }
 
+//this is the code that will be used to display the bottom navigation bar
 class CupertinoTabBarBottom extends StatelessWidget {
   const CupertinoTabBarBottom({super.key});
 
@@ -70,13 +61,13 @@ class CupertinoTabBarBottom extends StatelessWidget {
         tabBuilder: (context, index) {
           switch (index) {
             case 0:
-              return const HomePage(title: 'Home');
+              return const HomePage();
             case 1:
-              return const MapPage(title: 'Map');
+              return const MapPage();
             case 2:
-              return const SettingsPage(title: 'Settings');
+              return const SettingsPage();
             default:
-              return const HomePage(title: 'Home');
+              return const HomePage();
           }
         },
       );

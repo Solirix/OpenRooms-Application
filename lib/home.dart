@@ -1,11 +1,92 @@
 import 'package:flutter/cupertino.dart';
 import 'package:openrooms/hourly_occupancy.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'dart:async';
 
-class HomePage extends StatelessWidget {
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  const HomePage({super.key, required this.title});
+  @override
+  State<HomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<HomePage> {
+  String room1Value = '0';
+  String room2Value = '0';
+  String room3Value = '0';
+
+  late StreamSubscription<DatabaseEvent> _subscriptionRoom1;
+  late StreamSubscription<DatabaseEvent> _subscriptionRoom2;
+  late StreamSubscription<DatabaseEvent> _subscriptionRoom3;
+
+  @override
+  void initState() {
+    super.initState();
+    setupRoomListeners();
+  }
+
+  void setupRoomListeners() {
+    DatabaseReference refRoom1 = FirebaseDatabase.instance.ref().child('room1');
+    DatabaseReference refRoom2 = FirebaseDatabase.instance.ref().child('room2');
+    DatabaseReference refRoom3 = FirebaseDatabase.instance.ref().child('room3');
+
+    _subscriptionRoom1 = refRoom1.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        room1Value = event.snapshot.value.toString();
+        //print('Updated Room1 Value: $room1Value');
+      });
+    });
+
+    _subscriptionRoom2 = refRoom2.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        room2Value = event.snapshot.value.toString();
+        //print('Updated Room2 Value: $room2Value');
+      });
+    });
+
+    _subscriptionRoom3 = refRoom3.onValue.listen((DatabaseEvent event) {
+      setState(() {
+        room3Value = event.snapshot.value.toString();
+        //print('Updated Room3 Value: $room3Value');
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscriptionRoom1.cancel();
+    _subscriptionRoom2.cancel();
+    _subscriptionRoom3.cancel();
+    super.dispose();
+  }
+
+  void navigateIfDataExists(String? roomValue, BuildContext context) {
+    if (roomValue != "null") {
+      Navigator.of(context).push(
+        CupertinoPageRoute<void>(
+          builder: (BuildContext context) {
+            return const HourlyOccupancy(); // Replace with the appropriate page
+          },
+        ),
+      );
+    }
+  }
+
+  Widget? roomAdditionalInfo(String? roomValue) {
+    if (roomValue == "null") {
+      // Return null if the roomValue is null (indicating offline)
+      return null;
+    } else {
+      // Return the chevron and text for available or unavailable rooms
+      return const Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Text('Occupancy data'),
+          CupertinoListTileChevron(),
+        ],
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +99,8 @@ class HomePage extends StatelessWidget {
             children: <CupertinoListTile>[
               CupertinoListTile.notched(
                 title: const Text('Room 1', style: TextStyle(fontSize: 23)),
-                subtitle:
-                    const Text('Available', style: TextStyle(fontSize: 15)),
+                subtitle: Text(getRoomStatus(room1Value),
+                    style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
@@ -28,23 +109,17 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       width: 25.0,
                       height: 25.0,
-                      color: CupertinoColors.activeGreen,
+                      color: getRoomColor(room1Value),
                     ),
                   ),
                 ),
-                additionalInfo: const Text('View historical occupancy data'),
-                trailing: const CupertinoListTileChevron(),
-                onTap: () => Navigator.of(context).push(
-                  CupertinoPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return const HourlyOccupancy();
-                    },
-                  ),
-                ),
+                additionalInfo: roomAdditionalInfo(room1Value),
+                onTap: () => navigateIfDataExists(room1Value, context),
               ),
               CupertinoListTile.notched(
                 title: const Text('Room 2', style: TextStyle(fontSize: 23)),
-                subtitle: const Text('Offline', style: TextStyle(fontSize: 15)),
+                subtitle: Text(getRoomStatus(room2Value),
+                    style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
@@ -53,16 +128,18 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       width: 25.0,
                       height: 25.0,
-                      color: CupertinoColors.inactiveGray,
+                      color: getRoomColor(room2Value),
                     ),
                   ),
                 ),
                 //additionalInfo: const Text('Not available'),
+                additionalInfo: roomAdditionalInfo(room2Value),
+                onTap: () => navigateIfDataExists(room2Value, context),
               ),
               CupertinoListTile.notched(
                 title: const Text('Room 3', style: TextStyle(fontSize: 23)),
-                subtitle:
-                    const Text('Not Available', style: TextStyle(fontSize: 15)),
+                subtitle: Text(getRoomStatus(room3Value),
+                    style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
@@ -71,22 +148,35 @@ class HomePage extends StatelessWidget {
                     child: Container(
                       width: 25.0,
                       height: 25.0,
-                      color: CupertinoColors.systemRed,
+                      color: getRoomColor(room3Value),
                     ),
                   ),
                 ),
-                additionalInfo: const Text('View historical occupancy data'),
-                trailing: const CupertinoListTileChevron(),
-                onTap: () => Navigator.of(context).push(
-                  CupertinoPageRoute<void>(
-                    builder: (BuildContext context) {
-                      return const HourlyOccupancy();
-                    },
-                  ),
-                ),
+                additionalInfo: roomAdditionalInfo(room3Value),
+                onTap: () => navigateIfDataExists(room3Value, context),
               ),
             ],
           ),
         ));
+  }
+}
+
+String getRoomStatus(String roomValue) {
+  if (roomValue == "null") {
+    return 'Offline';
+  } else if (roomValue == '0') {
+    return 'Available';
+  } else {
+    return 'Unavailable';
+  }
+}
+
+Color getRoomColor(String? roomValue) {
+  if (roomValue == "null") {
+    return CupertinoColors.inactiveGray; // Grey color for 'null' (offline)
+  } else if (roomValue == '0') {
+    return CupertinoColors.activeGreen; // Green color for '0' (available)
+  } else {
+    return CupertinoColors.systemRed; // Red color for values > 0 (unavailable)
   }
 }

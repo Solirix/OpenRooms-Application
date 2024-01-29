@@ -11,7 +11,7 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => ThemeProvider(), // Provide the necessary provider
         child: const CupertinoApp(
-          home: SettingsPage(title: 'Settings'),
+          home: SettingsPage(),
         ),
       ),
     );

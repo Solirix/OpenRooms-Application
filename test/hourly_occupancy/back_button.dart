@@ -8,7 +8,7 @@ void main() {
     // Build the widget tree
     await tester.pumpWidget(const CupertinoApp(
       home: CupertinoPageScaffold(
-        child: HomePage(title: 'Home'),
+        child: HomePage(),
       ),
     ));
 

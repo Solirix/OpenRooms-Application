@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:openrooms/themeProvider.dart'; // Assuming this file contains the ThemeProvider class
 import 'package:provider/provider.dart';
 
-// Define a StatelessWidget for the SettingsPage
+//Define a StatelessWidget for the SettingsPage
 // class SettingsPage extends StatelessWidget {
-//   final String title;
-
 //   // Constructor to receive the title for the SettingsPage
-//   const SettingsPage({super.key, required this.title});
+//   const SettingsPage({
+//     super.key,
+//   });
 
 //   // Build method to construct the UI for the SettingsPage
 //   @override
@@ -87,9 +87,7 @@ import 'package:provider/provider.dart';
 // }
 
 class SettingsPage extends StatelessWidget {
-  final String title;
-
-  const SettingsPage({super.key, required this.title});
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +100,6 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                title,
-                style: const TextStyle(fontSize: 48),
-              ),
               const SizedBox(height: 20),
               CupertinoSegmentedControl<int>(
                 children: const {
