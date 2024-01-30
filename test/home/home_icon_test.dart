@@ -16,12 +16,12 @@ void main() {
   });
 
   testWidgets('Find home icon and click it to go to home page', (tester) async {
-    // navigate to the tab widget
+    // Rest of your test code
     await tester.pumpWidget(const CupertinoApp(
       home: CupertinoTabBarBottom(),
     ));
 
-    //find the home icon and tap it
+    // Find the home icon and tap it
     await tester.tap(find.byIcon(CupertinoIcons.house_fill));
     await tester.pumpAndSettle();
 
@@ -29,3 +29,4 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 }
+
