@@ -20,11 +20,11 @@ void main() {
   });
 
   MockFirebaseDatabase.instance.reference().child('room1').set('null');
-    setUp(() {
+  setUp(() {
     firebaseDatabase = MockFirebaseDatabase.instance;
   });
 
-testWidgets('Click home page icon', (tester) async {
+  testWidgets('Click home page icon', (tester) async {
     // Create a test widget
     await tester.pumpWidget(
       CupertinoApp(
@@ -38,6 +38,5 @@ testWidgets('Click home page icon', (tester) async {
 
     // Expect to find the home page
     expect(find.byType(HomePage), findsOneWidget);
-    
   });
 }
