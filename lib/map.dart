@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
 class MapPage extends StatelessWidget {
-  final String title;
-
-  const MapPage({Key? key, required this.title}) : super(key: key);
+  const MapPage({super.key});
 
   @override
   Widget build(BuildContext context) {

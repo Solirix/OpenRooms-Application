@@ -6,6 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider extends ChangeNotifier {
   // Flag to track whether the app is in dark mode or not.
   bool _isDarkMode = false;
+  ThemeMode _currentThemeMode = ThemeMode.system;
+  ThemeMode getThemeMode() {
+    return _currentThemeMode;
+  }
 
   // Getter to check if the app is currently in dark mode.
   bool get isDarkMode => _isDarkMode;
@@ -15,13 +19,16 @@ class ThemeProvider extends ChangeNotifier {
     switch (mode) {
       case ThemeMode.light:
         _isDarkMode = false; // Set to light mode.
+        _currentThemeMode = ThemeMode.light;
         break;
       case ThemeMode.dark:
         _isDarkMode = true; // Set to dark mode.
+        _currentThemeMode = ThemeMode.dark;
         break;
       case ThemeMode.system:
         // Introduce a new method to handle the system default theme
         _isDarkMode = _getSystemBrightness() == Brightness.dark;
+        _currentThemeMode = ThemeMode.system;
         break;
       default:
         break;
@@ -107,4 +114,5 @@ Future<ThemeMode> getSavedTheme() async {
     return ThemeMode.system; // If no saved index, return system default as the default theme
   }
 }
+
 }

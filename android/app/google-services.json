@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1022831872618",
+    "firebase_url": "https://openrooms-bee8a-default-rtdb.firebaseio.com",
+    "project_id": "openrooms-bee8a",
+    "storage_bucket": "openrooms-bee8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022831872618:android:35fbcd11f380b6de98d813",
+        "android_client_info": {
+          "package_name": "com.example.open_rooms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9yLpdH5EhZL2FehrUz8c5fXje0xu8xOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022831872618:android:a3320df1b8b4cc5f98d813",
+        "android_client_info": {
+          "package_name": "com.example.open_rooms2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9yLpdH5EhZL2FehrUz8c5fXje0xu8xOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022831872618:android:c6c46916b0fda65598d813",
+        "android_client_info": {
+          "package_name": "com.example.openrooms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9yLpdH5EhZL2FehrUz8c5fXje0xu8xOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
