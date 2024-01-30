@@ -28,5 +28,17 @@ void main() {
 
     // expect to find the settings page
     expect(find.byType(SettingsPage), findsOneWidget);
+
+    //find the disclaimer text and tap it
+    await tester.tap(find.text('Legal Disclaimer'));
+    await tester.pumpAndSettle();
+
+    //click the back button in the top left
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+
+    // expect to find the settings page
+    expect(find.byType(SettingsPage), findsOneWidget);
+
   });
 }
