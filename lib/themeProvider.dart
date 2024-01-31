@@ -74,7 +74,7 @@ class ThemeProvider extends ChangeNotifier {
   static const CupertinoThemeData darkCupertinoTheme = CupertinoThemeData(
     brightness: Brightness.dark,
     primaryColor: CupertinoColors.systemBlue,
-    primaryContrastingColor: CupertinoColors.white,
+    primaryContrastingColor: CupertinoColors.black,
     barBackgroundColor: CupertinoColors.black,
     textTheme: CupertinoTextThemeData(
       textStyle: TextStyle(
