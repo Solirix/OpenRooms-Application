@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/settings.dart';
 import 'package:provider/provider.dart';
 import 'package:openrooms/themeProvider.dart';
-import 'package:openrooms/firebase_options.dart';
 import 'package:openrooms/main.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
