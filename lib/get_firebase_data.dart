@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 
+//this class will be used to get the data from the firebase database
 class FirebaseRoomService {
   final FirebaseDatabase firebaseDatabase;
 

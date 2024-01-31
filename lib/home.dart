@@ -263,6 +263,7 @@ class _MyHomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
+                      key: const Key('room1'),
                       width: 25.0,
                       height: 25.0,
                       color: getRoomColor(room1Value),
@@ -282,6 +283,7 @@ class _MyHomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
+                      key: const Key('room2'),
                       width: 25.0,
                       height: 25.0,
                       color: getRoomColor(room2Value),
@@ -302,6 +304,7 @@ class _MyHomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Container(
+                      key: const Key('room3'),
                       width: 25.0,
                       height: 25.0,
                       color: getRoomColor(room3Value),

@@ -4,13 +4,15 @@ import 'package:openrooms/hourly_occupancy.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  testWidgets('Find calendar icon and click it to change the date', (tester) async {
+  testWidgets('Find calendar icon and click it to change the date',
+      (tester) async {
     // navigate to the tab widget
     await tester.pumpWidget(const CupertinoApp(
       home: HourlyOccupancy(),
     ));
     // Verify that the initial date is today's date.
-    expect(find.text(DateFormat.yMMMd().format(DateTime.now())), findsOneWidget);
+    expect(
+        find.text(DateFormat.yMMMd().format(DateTime.now())), findsOneWidget);
 
     // Tap on the calendar icon to open the calendar popup.
     await tester.tap(find.byIcon(CupertinoIcons.calendar));
