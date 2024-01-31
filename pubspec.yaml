@@ -44,6 +44,7 @@ dependencies:
   firebase_database: ^10.2.7
   firebase_auth: ^4.10.1
   firebase_database_mocks: ^0.6.0
+  http: ^1.2.0
   
   
 
@@ -59,7 +60,8 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
   test: ^1.14.4 #For unit tests
-  mockito: ^5.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

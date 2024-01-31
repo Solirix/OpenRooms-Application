@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:openrooms/home.dart';
-import 'package:openrooms/main.dart'; // Import your main.dart
-import 'package:openrooms/get_firebase_data.dart'; // Import your Firebase service file
+import 'package:openrooms/map.dart';
+import 'package:openrooms/main.dart';
+import 'package:openrooms/get_firebase_data.dart';
 
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
@@ -34,12 +34,12 @@ void main() {
     ));
 
     // Perform your test actions
-    final homeIcon = find.byIcon(CupertinoIcons.house_fill);
-    expect(homeIcon, findsOneWidget);
-    await widgetTester.tap(homeIcon);
+    final mapIcon = find.byIcon(CupertinoIcons.map_fill);
+    expect(mapIcon, findsOneWidget);
+    await widgetTester.tap(mapIcon);
     await widgetTester.pumpAndSettle();
 
     //expect to find the home widget
-    expect(find.byType(HomePage), findsOneWidget);
+    expect(find.byType(MapPage), findsOneWidget);
   });
 }

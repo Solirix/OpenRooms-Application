@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:openrooms/home.dart';
-import 'package:openrooms/main.dart'; // Import your main.dart
-import 'package:openrooms/get_firebase_data.dart'; // Import your Firebase service file
+import 'package:openrooms/settings.dart';
+import 'package:openrooms/main.dart';
+import 'package:openrooms/get_firebase_data.dart';
+import 'package:provider/provider.dart';
+import 'package:openrooms/themeProvider.dart';
 
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
@@ -28,18 +30,22 @@ void main() {
     when(mockService.getRoomValueStream('room3'))
         .thenAnswer((_) => Stream.fromIterable(['null']));
 
-    // Pump the widget with the mock service
-    await widgetTester.pumpWidget(CupertinoApp(
-      home: CupertinoTabBarBottom(firebaseRoomService: mockService),
-    ));
+    await widgetTester.pumpWidget(
+      ChangeNotifierProvider(
+        create: (context) => ThemeProvider(), // Provide the necessary provider
+        child: CupertinoApp(
+          home: CupertinoTabBarBottom(firebaseRoomService: mockService),
+        ),
+      ),
+    );
 
     // Perform your test actions
-    final homeIcon = find.byIcon(CupertinoIcons.house_fill);
-    expect(homeIcon, findsOneWidget);
-    await widgetTester.tap(homeIcon);
+    final settingsIcon = find.byIcon(CupertinoIcons.gear_alt_fill);
+    expect(settingsIcon, findsOneWidget);
+    await widgetTester.tap(settingsIcon);
     await widgetTester.pumpAndSettle();
 
     //expect to find the home widget
-    expect(find.byType(HomePage), findsOneWidget);
+    expect(find.byType(SettingsPage), findsOneWidget);
   });
 }

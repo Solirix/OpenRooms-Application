@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:openrooms/home.dart';
 import 'package:openrooms/map.dart';
 import 'package:openrooms/settings.dart';
-import 'package:openrooms/tab_bar.dart';
 import 'package:openrooms/themeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:openrooms/get_firebase_data.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,42 +35,45 @@ class MyApp extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return CupertinoApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Open Rooms',
-      theme: themeProvider.getCupertinoTheme(), // Apply the theme
-      home: const CupertinoTabBarBottom(), // Your home widget
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Open Rooms',
+        theme: themeProvider.getCupertinoTheme(), // Apply the theme
+        home: CupertinoTabBarBottom(
+          firebaseRoomService: FirebaseRoomService(
+              firebaseDatabase: FirebaseDatabase.instance), // Your home widget
+        ));
   }
 }
 
-// //this is the code that will be used to display the bottom navigation bar
-// class CupertinoTabBarBottom extends StatelessWidget {
-//   const CupertinoTabBarBottom({super.key});
+//this is the code that will be used to display the bottom navigation bar
+class CupertinoTabBarBottom extends StatelessWidget {
+  final FirebaseRoomService firebaseRoomService;
+  const CupertinoTabBarBottom({super.key, required this.firebaseRoomService});
 
-//   @override
-//   Widget build(BuildContext context) => CupertinoTabScaffold(
-//         tabBar: CupertinoTabBar(items: const [
-//           BottomNavigationBarItem(
-//             icon: Icon(CupertinoIcons.house_fill),
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(CupertinoIcons.map_fill),
-//           ),
-//           BottomNavigationBarItem(
-//             icon: Icon(CupertinoIcons.gear_alt_fill),
-//           ),
-//         ]),
-//         tabBuilder: (context, index) {
-//           switch (index) {
-//             case 0:
-//               return const HomePage();
-//             case 1:
-//               return const MapPage();
-//             case 2:
-//               return const SettingsPage();
-//             default:
-//               return const HomePage();
-//           }
-//         },
-//       );
-// }
+  @override
+  Widget build(BuildContext context) => CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(items: const [
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.house_fill),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.map_fill),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.gear_alt_fill),
+          ),
+        ]),
+        tabBuilder: (context, index) {
+          switch (index) {
+            case 0:
+              return HomePage(firebaseRoomService: firebaseRoomService);
+            case 1:
+              return const MapPage();
+            case 2:
+              return const SettingsPage();
+            default:
+              return HomePage(firebaseRoomService: firebaseRoomService);
+          }
+        },
+      );
+}
