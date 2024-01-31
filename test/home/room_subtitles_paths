@@ -36,12 +36,34 @@ void main() {
     await tester.pumpAndSettle();
 
     //expect room1 subtitle to be 'Available'
-    expect(find.widgetWithText(CupertinoListTile, 'Available'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is CupertinoListTile &&
+        widget.title is Text && (widget.title as Text).data == 'Room 1' &&
+        widget.subtitle is Text && (widget.subtitle as Text).data == 'Available',
+      ),
+      findsOneWidget,
+  );
+
 
     //expect room2 subtitle to be 'Unavailable'
-    expect(find.widgetWithText(CupertinoListTile,'Unavailable'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is CupertinoListTile &&
+        widget.title is Text && (widget.title as Text).data == 'Room 2' &&
+        widget.subtitle is Text && (widget.subtitle as Text).data == 'Unavailable',
+      ),
+      findsOneWidget,
+  );
 
     //expect room3 subtitle to be 'Offline'
-    expect(find.widgetWithText(CupertinoListTile,'Offline'), findsOneWidget);
+    expect(
+      find.byWidgetPredicate(
+        (widget) => widget is CupertinoListTile &&
+        widget.title is Text && (widget.title as Text).data == 'Room 3' &&
+        widget.subtitle is Text && (widget.subtitle as Text).data == 'Offline',
+      ),
+      findsOneWidget,
+  );
   });
 }
