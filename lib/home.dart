@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:openrooms/hourly_occupancy.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'dart:async';
 import 'package:openrooms/get_firebase_data.dart';
 
@@ -237,7 +236,7 @@ class _MyHomePageState extends State<HomePage> {
       // Return the chevron and text for available or unavailable rooms
       return const Row(
         mainAxisSize: MainAxisSize.min,
-        children: const [
+        children: [
           Text('Occupancy data'),
           CupertinoListTileChevron(),
         ],
