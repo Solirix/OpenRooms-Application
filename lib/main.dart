@@ -40,7 +40,8 @@ class MyApp extends StatelessWidget {
         theme: themeProvider.getCupertinoTheme(), // Apply the theme
         home: CupertinoTabBarBottom(
           firebaseRoomService: FirebaseRoomService(
-              firebaseDatabase: FirebaseDatabase.instance), // Your home widget
+            firebaseDatabase: FirebaseDatabase.instance,
+          ),
         ));
   }
 }

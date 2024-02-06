@@ -128,33 +128,6 @@ class SettingsPage extends StatelessWidget {
                 },
                 groupValue: _getGroupValue(context),
               ),
-              const SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute<void>(
-                      builder: (BuildContext context) {
-                        return const LegalDisclaimerPage();
-                      },
-                    ),
-                  );
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: CupertinoColors.activeBlue),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Text(
-                    'Legal Disclaimer',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: CupertinoColors.activeBlue,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -177,35 +150,35 @@ class SettingsPage extends StatelessWidget {
 }
 
 // Additional page for Legal Disclaimer
-class LegalDisclaimerPage extends StatelessWidget {
-  const LegalDisclaimerPage({super.key});
+// class LegalDisclaimerPage extends StatelessWidget {
+//   const LegalDisclaimerPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Legal Disclaimer'),
-      ),
-      child: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'This is the Legal Disclaimer page.',
-                style: TextStyle(fontSize: 20),
-              ),
-              CupertinoButton(
-                child: const Text('Ok'),
-                onPressed: () {
-                  // Navigate back to the previous page
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return CupertinoPageScaffold(
+//       navigationBar: const CupertinoNavigationBar(
+//         middle: Text('Legal Disclaimer'),
+//       ),
+//       child: SafeArea(
+//         child: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               const Text(
+//                 'This is the Legal Disclaimer page.',
+//                 style: TextStyle(fontSize: 20),
+//               ),
+//               CupertinoButton(
+//                 child: const Text('Ok'),
+//                 onPressed: () {
+//                   // Navigate back to the previous page
+//                   Navigator.of(context).pop();
+//                 },
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

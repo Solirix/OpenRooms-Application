@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:openrooms/home.dart';
-import 'package:openrooms/main.dart'; // Import your main.dart
-import 'package:openrooms/get_firebase_data.dart'; // Import your Firebase service file
+import 'package:openrooms/main.dart';
+import 'package:openrooms/get_firebase_data.dart';
 
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
