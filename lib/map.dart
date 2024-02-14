@@ -22,6 +22,7 @@ class _MapPageState extends State<MapPage> {
   late StreamSubscription<String> _subscriptionRoom3;
 
   @override
+  // Get Room statuses
   void initState() {
     super.initState();
 
@@ -52,11 +53,13 @@ class _MapPageState extends State<MapPage> {
     super.dispose();
   }
 
+  // Make file name for correct map PNG
   void _updateMapImageName() {
     mapImageName =
         'map${_mapRoomValue(room1Value)}${_mapRoomValue(room2Value)}${_mapRoomValue(room3Value)}.png';
   }
 
+  // Convert Room values to Map values
   String _mapRoomValue(String? roomValue) {
     if (roomValue == 'null') {
       return 'N'; // Null -> Offline
@@ -76,7 +79,7 @@ class _MapPageState extends State<MapPage> {
       child: SafeArea(
         child: Stack(
           children: [
-            // Background map image
+            // Map image
             Positioned.fill(
               child: Image.asset(
                 'lib/assets/images/$mapImageName',
