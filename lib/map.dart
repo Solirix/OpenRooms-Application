@@ -1,7 +1,71 @@
 import 'package:flutter/cupertino.dart';
+import 'dart:async';
+import 'package:openrooms/get_firebase_data.dart';
 
-class MapPage extends StatelessWidget {
-  const MapPage({super.key});
+class MapPage extends StatefulWidget {
+  final FirebaseRoomService firebaseRoomService;
+
+  const MapPage({Key? key, required this.firebaseRoomService});
+
+  @override
+  State<MapPage> createState() => _MapPageState();
+}
+
+class _MapPageState extends State<MapPage> {
+  String room1Value = 'null';
+  String room2Value = 'null';
+  String room3Value = 'null';
+  late String mapImageName;
+
+  late StreamSubscription<String> _subscriptionRoom1;
+  late StreamSubscription<String> _subscriptionRoom2;
+  late StreamSubscription<String> _subscriptionRoom3;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _subscriptionRoom1 =
+        widget.firebaseRoomService.getRoomValueStream('room1').listen((value) {
+      setState(() => room1Value = value);
+      _updateMapImageName();
+    });
+
+    _subscriptionRoom2 =
+        widget.firebaseRoomService.getRoomValueStream('room2').listen((value) {
+      setState(() => room2Value = value);
+      _updateMapImageName();
+    });
+
+    _subscriptionRoom3 =
+        widget.firebaseRoomService.getRoomValueStream('room3').listen((value) {
+      setState(() => room3Value = value);
+      _updateMapImageName();
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscriptionRoom1.cancel();
+    _subscriptionRoom2.cancel();
+    _subscriptionRoom3.cancel();
+    super.dispose();
+  }
+
+  void _updateMapImageName() {
+    mapImageName =
+        'map${_mapRoomValue(room1Value)}${_mapRoomValue(room2Value)}${_mapRoomValue(room3Value)}.png';
+  }
+
+  String _mapRoomValue(String? roomValue) {
+    if (roomValue == 'null') {
+      return 'N'; // Null -> Offline
+    } else if (roomValue == '0') {
+      return '1'; // 0 -> Available
+    } else {
+      return '0'; // Occupied for all other values
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,83 +77,15 @@ class MapPage extends StatelessWidget {
         child: Stack(
           children: [
             // Background map image
-            Positioned(
-              left: 5,
-              right: 5,
-              top: 5,
-              bottom: 5,
+            Positioned.fill(
               child: Image.asset(
-                //'lib/assets/images/map1.png',
-                'lib/assets/images/mapF1.png',
-                //fit: BoxFit.fill,
+                'lib/assets/images/$mapImageName',
+                fit: BoxFit.contain,
               ),
             ),
-
-            // Specific room overlays
-            // Replace with actual data and positions
-//            Positioned(
-//              left: 122, // Example X position
-//              top: 83, // Example Y position
-//              child: Image.asset(
-//                _getRoomStatusImage1('Available'),
-//                width: 120,
-//              ),
-//            ),
-//            Positioned(
-//              left: 369, // Example X position
-//              top: 83, // Example Y position
-//              child: Image.asset(
-//                _getRoomStatusImage2('Offline'),
-//                width: 120,
-//              ),
-//            ),
-//            Positioned(
-//              left: 369, // Example X position
-//              top: 610, // Example Y position
-//              child: Image.asset(
-//                _getRoomStatusImage3('Not Available'),
-//                width: 120,
-//              ),
-//             ),
           ],
         ),
       ),
     );
   }
-
-  // String _getRoomStatusImage1(String status) {
-  //   switch (status) {
-  //     case 'Available':
-  //       return 'lib/assets/images/available1.png';
-  //     case 'Offline':
-  //       return 'lib/assets/images/offline1.png';
-  //     case 'Not Available':
-  //     default:
-  //       return 'lib/assets/images/not_available1.png';
-  //   }
-  // }
-
-  // String _getRoomStatusImage2(String status) {
-  //   switch (status) {
-  //     case 'Available':
-  //       return 'lib/assets/images/available2.png';
-  //     case 'Offline':
-  //       return 'lib/assets/images/offline2.png';
-  //     case 'Not Available':
-  //     default:
-  //       return 'lib/assets/images/not_available2.png';
-  //   }
-  // }
-
-  // String _getRoomStatusImage3(String status) {
-  //   switch (status) {
-  //     case 'Available':
-  //       return 'lib/assets/images/available3.png';
-  //     case 'Offline':
-  //       return 'lib/assets/images/offline3.png';
-  //     case 'Not Available':
-  //     default:
-  //       return 'lib/assets/images/not_available3.png';
-  //   }
-  // }
 }

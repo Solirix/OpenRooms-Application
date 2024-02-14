@@ -69,7 +69,7 @@ class CupertinoTabBarBottom extends StatelessWidget {
             case 0:
               return HomePage(firebaseRoomService: firebaseRoomService);
             case 1:
-              return const MapPage();
+              return MapPage(firebaseRoomService: firebaseRoomService);
             case 2:
               return const SettingsPage();
             default:
