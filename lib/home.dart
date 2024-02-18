@@ -22,6 +22,14 @@ class _MyHomePageState extends State<HomePage> {
   late StreamSubscription<String> _subscriptionRoom2;
   late StreamSubscription<String> _subscriptionRoom3;
 
+  // RoomStatus? room1Value;
+  // RoomStatus? room2Value;
+  // RoomStatus? room3Value;
+
+  // late StreamSubscription<RoomStatus> _subscriptionRoom1;
+  // late StreamSubscription<RoomStatus> _subscriptionRoom2;
+  // late StreamSubscription<RoomStatus> _subscriptionRoom3;
+
   @override
   void initState() {
     super.initState();
@@ -44,6 +52,7 @@ class _MyHomePageState extends State<HomePage> {
       _subscriptionRoom1 = widget.firebaseRoomService
           .getRoomValueStream('room1')
           .listen((value) {
+        //print('Room 1 Changed at ${value.timestamp}');
         setState(() => room1Value = value);
       });
 
@@ -69,7 +78,6 @@ class _MyHomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  // Rest of your widget code...
   //navigate to the hourly occupancy page if the room is not offline
   void navigateIfDataExists(String? roomValue, BuildContext context) {
     if (roomValue != "null") {
@@ -99,6 +107,36 @@ class _MyHomePageState extends State<HomePage> {
       );
     }
   }
+
+  //navigate to the hourly occupancy page if the room is not offline
+  // void navigateIfDataExists(RoomStatus? roomValue, BuildContext context) {
+  //   if (roomValue != null && roomValue.value != "null") {
+  //     Navigator.of(context).push(
+  //       CupertinoPageRoute<void>(
+  //         builder: (BuildContext context) {
+  //           return const HourlyOccupancy(); // Replace with the appropriate page
+  //         },
+  //       ),
+  //     );
+  //   }
+  // }
+
+  // // display the chevron and text for available rooms
+  // Widget? roomAdditionalInfo(RoomStatus? roomValue) {
+  //   if (roomValue == null || roomValue.value == "null") {
+  //     // Return null if the roomValue is null (indicating offline)
+  //     return null;
+  //   } else {
+  //     // Return the chevron and text for available or unavailable rooms
+  //     return const Row(
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: [
+  //         Text('Occupancy data'),
+  //         CupertinoListTileChevron(),
+  //       ],
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -187,6 +225,17 @@ String getRoomStatus(String roomValue) {
   }
 }
 
+// Set the room's subtitle
+// String getRoomStatus(RoomStatus? roomValue) {
+//   if (roomValue == null || roomValue.value == "null") {
+//     return 'Offline';
+//   } else if (roomValue.value == '0') {
+//     return 'Available';
+//   } else {
+//     return 'Unavailable';
+//   }
+// }
+
 //set the rooms color
 Color getRoomColor(String? roomValue) {
   if (roomValue == "null") {
@@ -197,3 +246,14 @@ Color getRoomColor(String? roomValue) {
     return CupertinoColors.systemRed; // Red color for values > 0 (unavailable)
   }
 }
+
+// Set the room's color
+// Color getRoomColor(RoomStatus? roomValue) {
+//   if (roomValue == null || roomValue.value == "null") {
+//     return CupertinoColors.inactiveGray; // Grey color for 'null' (offline)
+//   } else if (roomValue.value == '0') {
+//     return CupertinoColors.activeGreen; // Green color for '0' (available)
+//   } else {
+//     return CupertinoColors.systemRed; // Red color for values > 0 (unavailable)
+//   }
+// }

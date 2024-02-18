@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: ^4.10.1
   firebase_database_mocks: ^0.6.0
   http: ^1.2.0
+  flutter_heatmap_calendar: ^1.0.5
 
   
   
