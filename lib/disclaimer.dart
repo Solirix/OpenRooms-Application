@@ -1,3 +1,14 @@
+/// This Dart file provides utilities and UI components for building the Legal Disclaimer Dialog Box within the App
+/// 
+/// Classes:
+/// - `AppUtils`: Contains static methods to check and update app launch status.
+///   - `isFirstLaunch`: Checks if the app is being launched for the first time by consulting
+///     the `SharedPreferences`. It updates the launch status accordingly.
+/// 
+/// - `DisclaimerDialog`: A stateless widget that displays a legal disclaimer in a `CupertinoAlertDialog`.
+///   This dialog is intended to inform users about legal information regarding the app.
+///
+library;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 
