@@ -14,11 +14,16 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
+
+// Returns Firebase options based on the current platform the app is running on.
 class DefaultFirebaseOptions {
+  // Check if the app is running on the web and return corresponding Firebase options.
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
     }
+    // Switch between different platforms (Android, iOS, macOS, Windows, Linux)
+    // to return the respective Firebase options for each.
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
@@ -30,6 +35,8 @@ class DefaultFirebaseOptions {
         return windows;
       case TargetPlatform.linux:
         return linux;
+      // Throws an error if the platform is not supported, ensuring that Firebase is only initialized
+      // on supported platforms.
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
