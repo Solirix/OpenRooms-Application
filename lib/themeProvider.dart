@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// This file defines the `ThemeProvider` class, which is responsible for managing the theme of the application.
+/// It allows toggling between light, dark, and system default themes, and persists the user's theme preference using
+/// SharedPreferences.
+///
+/// Features:
+/// - Toggle theme: Supports changing the app's theme dynamically to light, dark, or system default.
+/// - Theme persistence: Saves the user's theme preference locally and loads it on app startup.
+/// - Dual theme support: Provides both `ThemeData` for Material widgets and `CupertinoThemeData` for Cupertino widgets,
+///   enabling a consistent theming approach across different platform styles.
+/// - System theme detection: Detects the system theme preference (light or dark) and adjusts the app's theme automatically.
+
+
 // ThemeProvider class manages the app's theme and provides methods to toggle between light and dark modes.
 class ThemeProvider extends ChangeNotifier {
   // Flag to track whether the app is in dark mode or not.
