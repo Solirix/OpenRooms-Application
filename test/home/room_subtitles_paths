@@ -5,6 +5,19 @@ import 'package:openrooms/hourly_occupancy.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
 
+/// This test file is focused on verifying the dynamic UI updates of room availability indicators
+/// within the OpenRooms app. It employs widget testing to ensure that the HomePage correctly displays
+/// the availability status ('Available', 'Unavailable', 'Offline') for rooms based on the data provided
+/// by the FirebaseRoomService. The use of the 'mockito' package allows for simulating Firebase service
+/// responses without actual network calls.
+///
+/// Key Test Scenarios:
+/// - Mock responses are set up for three rooms with distinct availability states: available, unavailable, and offline.
+/// - The HomePage widget is rendered with these mocked responses, and the test checks if each room's availability
+///   status is displayed as expected.
+/// - This ensures that the app's UI accurately reflects the current state of room availability to the user.
+
+
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
   Stream<String> getRoomValueStream(String roomId) {
@@ -14,6 +27,7 @@ class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   }
 }
 
+// Begin test to ensure UI accurately reflects correct state of room availability to the user
 void main() {
   testWidgets('Check the room colors', (tester) async {
     // Create a mock FirebaseRoomService
