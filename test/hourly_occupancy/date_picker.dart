@@ -3,6 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/hourly_occupancy.dart';
 import 'package:intl/intl.dart';
 
+/// This test file is designed to validate the functionality of the calendar feature within the HourlyOccupancy widget
+/// It uses the `flutter_test` framework to simulate user interaction with the calendar icon,
+/// aiming to change the displayed date. The test ensures that the widget correctly updates to reflect the newly selected
+
+// Begin test to make sure that calendar updates calendar to correct day.
 void main() {
   testWidgets('Find calendar icon and click it to change the date',
       (tester) async {

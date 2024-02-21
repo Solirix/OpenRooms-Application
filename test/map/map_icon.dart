@@ -5,6 +5,13 @@ import 'package:openrooms/map.dart';
 import 'package:openrooms/main.dart';
 import 'package:openrooms/get_firebase_data.dart';
 
+/// This file contains a widget test focused on the navigation within the OpenRooms app,
+/// particularly testing the functionality of tapping the map icon and navigating to the MapPage.
+/// It utilizes the `flutter_test` framework for defining and running the widget test, and `mockito`
+/// for mocking the FirebaseRoomService, allowing for isolated testing of navigation behavior without
+/// real data dependencies.
+
+
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
@@ -15,6 +22,7 @@ class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   }
 }
 
+// Run test to make sure map icon can be found
 void main() {
   testWidgets('find home icon and click it', (widgetTester) async {
     // Create a mock FirebaseRoomService
@@ -33,7 +41,7 @@ void main() {
       home: CupertinoTabBarBottom(firebaseRoomService: mockService),
     ));
 
-    // Perform your test actions
+    // Expect that map icon is found and able to be clicked
     final mapIcon = find.byIcon(CupertinoIcons.map_fill);
     expect(mapIcon, findsOneWidget);
     await widgetTester.tap(mapIcon);
