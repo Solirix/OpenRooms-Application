@@ -7,6 +7,13 @@ import 'package:openrooms/main.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
 
+/// This test file focuses on verifying the functionality and UI of the SettingsPage,
+/// as well as the accessibility of the SettingsPage through the settings icon from the main navigation. It employs
+/// `flutter_test` for widget testing and `provider` for state management, along with `mockito` for mocking external
+/// dependencies. These tests ensure that the user can interact with the theme selection options (System, Light, Dark)
+/// on the SettingsPage and that the settings icon correctly navigates to the SettingsPage.
+
+
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
@@ -17,6 +24,7 @@ class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   }
 }
 
+// Main function that contains all tests
 void main() {
   testWidgets('SettingsPage UI test', (WidgetTester tester) async {
     // Wrap the SettingsPage with the necessary Provider
@@ -62,7 +70,7 @@ void main() {
         ),
       ),
     );
-
+    //Expect to be able to find and tap settings icon
     final settingsGear = find.byIcon(CupertinoIcons.gear_alt_fill);
     expect(settingsGear, findsOneWidget);
     await tester.tap(settingsGear);

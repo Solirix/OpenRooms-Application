@@ -3,6 +3,13 @@ import 'package:openrooms/themeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// This test is designed to validate the functionality of the ThemeProvider class.
+/// It focuses on ensuring that theme toggling, saving, and loading behave as expected. The tests cover various
+/// scenarios including switching between light and dark themes, persisting theme preferences, and retrieving
+/// these preferences upon subsequent loads. Shared preferences are mocked to isolate tests from actual device storage.
+
+
+// Main function that contains all unit tests for ThemeProvider.dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter bindings are initialized
   SharedPreferences.setMockInitialValues({});

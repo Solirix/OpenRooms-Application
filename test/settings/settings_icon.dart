@@ -7,6 +7,11 @@ import 'package:openrooms/get_firebase_data.dart';
 import 'package:provider/provider.dart';
 import 'package:openrooms/themeProvider.dart';
 
+/// This test file is dedicated to testing the functionality of the settings gear icon,
+/// ensuring that tapping the icon navigates the user to the SettingsPage. It uses `flutter_test`
+/// for widget testing, `mockito` for creating mock service responses, and `provider` for state management.
+
+
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
@@ -17,6 +22,7 @@ class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   }
 }
 
+//Run test to make sure settings gear icon can be found and tapped
 void main() {
   testWidgets('find home icon and click it', (widgetTester) async {
     // Create a mock FirebaseRoomService
