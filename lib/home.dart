@@ -4,6 +4,16 @@ import 'dart:async';
 import 'package:openrooms/get_firebase_data.dart';
 import 'package:openrooms/disclaimer.dart';
 
+/// The HomePage class is a StatefulWidget that serves as the main screen of the app.
+/// It displays real-time information about various rooms' availability and allows navigation
+/// to more detailed occupancy information. It integrates Firebase data fetching and user interaction
+/// through a clean and intuitive Cupertino (iOS-style) UI.
+///
+/// Features:
+/// - Displays real-time status (available, unavailable, offline) of multiple rooms.
+/// - Allows users to navigate to detailed hourly occupancy information for each room.
+/// - Automatically shows a disclaimer dialog on the first app launch.
+
 class HomePage extends StatefulWidget {
   final FirebaseRoomService firebaseRoomService;
 
@@ -72,6 +82,7 @@ class _MyHomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    // Stops listening to room updates to avoid unnecessary work and free up resources.
     _subscriptionRoom1.cancel();
     _subscriptionRoom2.cancel();
     _subscriptionRoom3.cancel();
@@ -160,7 +171,7 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room1'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room1Value),
+                      color: getRoomColor(room1Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
@@ -180,7 +191,7 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room2'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room2Value),
+                      color: getRoomColor(room2Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
@@ -201,7 +212,7 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room3'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room3Value),
+                      color: getRoomColor(room3Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
