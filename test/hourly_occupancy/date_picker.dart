@@ -11,9 +11,10 @@ import 'package:intl/intl.dart';
 void main() {
   testWidgets('Find calendar icon and click it to change the date',
       (tester) async {
+    const String roomId = 'room1';
     // navigate to the tab widget
     await tester.pumpWidget(const CupertinoApp(
-      home: HourlyOccupancy(),
+      home: HourlyOccupancy(roomId: roomId),
     ));
     // Verify that the initial date is today's date.
     expect(

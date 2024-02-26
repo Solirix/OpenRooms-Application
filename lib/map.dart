@@ -15,7 +15,7 @@ import 'package:openrooms/get_firebase_data.dart';
 class MapPage extends StatefulWidget {
   final FirebaseRoomService firebaseRoomService;
 
-  const MapPage({Key? key, required this.firebaseRoomService});
+  const MapPage({super.key, required this.firebaseRoomService});
 
   @override
   State<MapPage> createState() => _MapPageState();

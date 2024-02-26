@@ -90,12 +90,14 @@ class _MyHomePageState extends State<HomePage> {
   }
 
   //navigate to the hourly occupancy page if the room is not offline
-  void navigateIfDataExists(String? roomValue, BuildContext context) {
+  void navigateIfDataExists(
+      String? roomValue, BuildContext context, String roomId) {
     if (roomValue != "null") {
       Navigator.of(context).push(
         CupertinoPageRoute<void>(
           builder: (BuildContext context) {
-            return const HourlyOccupancy(); // Replace with the appropriate page
+            return HourlyOccupancy(
+                roomId: roomId); // Replace with the appropriate page
           },
         ),
       );
@@ -171,12 +173,13 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room1'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room1Value), //Sets color to appropriate value based on data pulled from firebase
+                      color: getRoomColor(
+                          room1Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
                 additionalInfo: roomAdditionalInfo(room1Value),
-                onTap: () => navigateIfDataExists(room1Value, context),
+                onTap: () => navigateIfDataExists(room1Value, context, 'room1'),
               ),
               CupertinoListTile.notched(
                 title: const Text('Room 2', style: TextStyle(fontSize: 23)),
@@ -191,13 +194,14 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room2'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room2Value), //Sets color to appropriate value based on data pulled from firebase
+                      color: getRoomColor(
+                          room2Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
                 //additionalInfo: const Text('Not available'),
                 additionalInfo: roomAdditionalInfo(room2Value),
-                onTap: () => navigateIfDataExists(room2Value, context),
+                onTap: () => navigateIfDataExists(room2Value, context, 'room2'),
               ),
               CupertinoListTile.notched(
                 title: const Text('Room 3', style: TextStyle(fontSize: 23)),
@@ -212,12 +216,13 @@ class _MyHomePageState extends State<HomePage> {
                       key: const Key('room3'),
                       width: 25.0,
                       height: 25.0,
-                      color: getRoomColor(room3Value), //Sets color to appropriate value based on data pulled from firebase
+                      color: getRoomColor(
+                          room3Value), //Sets color to appropriate value based on data pulled from firebase
                     ),
                   ),
                 ),
                 additionalInfo: roomAdditionalInfo(room3Value),
-                onTap: () => navigateIfDataExists(room3Value, context),
+                onTap: () => navigateIfDataExists(room3Value, context, 'room3'),
               ),
             ],
           ),
