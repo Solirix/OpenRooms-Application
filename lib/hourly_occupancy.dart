@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; //needed to customize the date picker
 import 'package:table_calendar/table_calendar.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:openrooms/get_firebase_data.dart';
+import 'package:openrooms/utils.dart';
 
 /// This file defines the `HourlyOccupancy` StatefulWidget, which displays hourly occupancy data
 /// for a selected room. It utilizes the `TableCalendar` package for enabling users to pick a date,
@@ -15,8 +15,10 @@ import 'package:openrooms/get_firebase_data.dart';
 
 class HourlyOccupancy extends StatefulWidget {
   final String roomId;
+  final FirebaseRoomService firebaseRoomService;
 
-  const HourlyOccupancy({super.key, required this.roomId});
+  const HourlyOccupancy(
+      {super.key, required this.roomId, required this.firebaseRoomService});
 
   @override
   State<HourlyOccupancy> createState() => _HourlyOccupancyState();
@@ -39,14 +41,11 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
 
   void fetchOccupancyData() {
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate!);
-    // Use widget.roomId here instead of hardcoded "room1"
-    FirebaseRoomService firebaseRoomService =
-        FirebaseRoomService(firebaseDatabase: FirebaseDatabase.instance);
 
     // Cancel the previous subscription if it exists
     occupancyDataSubscription?.cancel();
 
-    firebaseRoomService
+    widget.firebaseRoomService
         .getOccupancyDataForDateAndRoom(formattedDate, widget.roomId)
         .listen((hourData) {
       if (mounted) {
@@ -54,9 +53,6 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
           occupancyData = hourData;
         });
       }
-      // setState(() {
-      //   occupancyData = hourData;
-      // });
     }, onError: (error) {
       print("Error fetching occupancy data: $error");
     });
@@ -218,12 +214,12 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
   Color getStatusColor(String status) {
     switch (status) {
       case 'available':
-        return Colors.green;
+        return CupertinoColors.activeGreen;
       case 'unavailable':
-        return Colors.red;
+        return CupertinoColors.systemRed;
       case 'offline':
       default:
-        return Colors.grey;
+        return CupertinoColors.inactiveGray;
     }
   }
 
@@ -231,7 +227,7 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
     return occupancyData?.keys.map((hour) {
           final status = occupancyData![hour]!;
           // Match the color based on the status
-          final color = getStatusColor(status);
+          final color = OccupancyUtils.getStatusColor(status);
           const radius = 8.0;
           const xValue =
               0.0; // Set a constant x-axis value since we are not using it

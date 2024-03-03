@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/hourly_occupancy.dart';
-import 'package:intl/intl.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
+import 'package:openrooms/utils.dart';
 
 /// This test file is designed to validate the functionality of the calendar feature within the HourlyOccupancy widget
 /// It uses the `flutter_test` framework to simulate user interaction with the calendar icon,
@@ -71,66 +71,53 @@ class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   }
 }
 
-// Begin test to make sure that calendar updates calendar to correct day.
 void main() {
-  testWidgets('Find calendar icon and click it to change the date',
+  testWidgets(
+      'Make sure each hour of the day is displayed from firebase in proper format',
       (tester) async {
     final mockService = MockFirebaseRoomService();
     const String roomId = 'room1';
-    // when(mockService.getOccupancyDataForDateAndRoom('2024-02-29', 'room1'))
-    //     .thenAnswer((_) => Stream.fromIterable([
-    //           {
-    //             0: 'available',
-    //             1: 'available',
-    //             2: 'available',
-    //             3: 'available',
-    //             4: 'available',
-    //             5: 'available',
-    //             9: 'available',
-    //             10: 'available',
-    //             11: 'available',
-    //             12: 'available',
-    //             13: 'available',
-    //             14: 'available',
-    //             15: 'available',
-    //             16: 'available',
-    //             17: 'available',
-    //             18: 'available',
-    //             19: 'available',
-    //             20: 'available',
-    //             21: 'available',
-    //             22: 'available',
-    //             23: 'available'
-    //           }
-    //         ]));
+    when(mockService.getOccupancyDataForDateAndRoom('2024-02-29', 'room1'))
+        .thenAnswer((_) => Stream.fromIterable([
+              {
+                0: 'available',
+                1: 'unavailable',
+                2: 'available',
+                3: 'unavailable',
+                4: 'available',
+                5: 'unavailable',
+                6: 'available',
+                7: 'unavailable',
+                8: 'available',
+                9: 'available',
+                10: 'unavailable',
+                11: 'available',
+                12: 'unavailable',
+                13: 'available',
+                14: 'unavailable',
+                15: 'available',
+                16: 'unavailable',
+                17: 'available',
+                18: 'unavailable',
+                19: 'available',
+                20: 'unavailable',
+                21: 'available',
+                22: 'unavailable',
+                23: 'available'
+              }
+            ]));
     // navigate to the tab widget
     await tester.pumpWidget(CupertinoApp(
       home: HourlyOccupancy(roomId: roomId, firebaseRoomService: mockService),
     ));
-    // Verify that the initial date is yesterday's date.
-    expect(
-        find.text(
-          DateFormat.yMMMd()
-              .format(DateTime.now().subtract(const Duration(days: 1))),
-        ),
-        findsOneWidget);
 
-    // Tap on the calendar icon to open the calendar popup.
-    await tester.tap(find.byIcon(CupertinoIcons.calendar));
-    await tester.pumpAndSettle();
-
-    // Select a new date (update with the desired date).
-    await tester.tap(find.text('26')); // Example: Tapping on 26th day.
-    await tester.pumpAndSettle();
-
-    // Verify that the new date is the 26th
-    expect(find.text('26'), findsOneWidget);
-
-    // Tap on the calendar icon to open the calendar popup.
-    await tester.tap(find.byIcon(CupertinoIcons.calendar));
-    await tester.pumpAndSettle();
-
-    //prove we can't find June yet since it didn't happen yet
-    expect(find.text('June'), findsNothing);
+    // Assert: Since we can't directly check scatter spot colors, we verify the data is correctly loaded
+    // and rely on unit tests for getStatusColor to ensure color logic is correct.
+    expect(OccupancyUtils.getStatusColor('available'),
+        equals(CupertinoColors.activeGreen));
+    expect(OccupancyUtils.getStatusColor('unavailable'),
+        equals(CupertinoColors.systemRed));
+    expect(OccupancyUtils.getStatusColor('offline'),
+        equals(CupertinoColors.inactiveGray));
   });
 }

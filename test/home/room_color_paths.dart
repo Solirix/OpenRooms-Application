@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/home.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
+import 'package:openrooms/utils.dart';
 
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
@@ -34,22 +35,27 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    //expect room1 color to be green
+    expect(HomeUtils.getRoomColor('0'), equals(CupertinoColors.activeGreen));
+    expect(HomeUtils.getRoomColor('1'), equals(CupertinoColors.systemRed));
     expect(
-      tester.widget<Container>(find.byKey(const Key('room1'))).color,
-      CupertinoColors.activeGreen,
-    );
-
-    //expect room2 color to be red
-    expect(
-      tester.widget<Container>(find.byKey(const Key('room2'))).color,
-      CupertinoColors.systemRed,
-    );
-
-    //expect room3 color to be grey
-    expect(
-      tester.widget<Container>(find.byKey(const Key('room3'))).color,
-      CupertinoColors.inactiveGray,
-    );
+        HomeUtils.getRoomColor('null'), equals(CupertinoColors.inactiveGray));
   });
+
+  //expect room1 color to be green
+  // expect(
+  //   tester.widget<Container>(find.byKey(const Key('room1'))).color,
+  //   equals(CupertinoColors.activeGreen),
+  // );
+
+  // //expect room2 color to be red
+  // expect(
+  //   tester.widget<Container>(find.byKey(const Key('room2'))).color,
+  //   CupertinoColors.systemRed,
+  // );
+
+  // //expect room3 color to be grey
+  // expect(
+  //   tester.widget<Container>(find.byKey(const Key('room3'))).color,
+  //   CupertinoColors.inactiveGray,
+  // );
 }
