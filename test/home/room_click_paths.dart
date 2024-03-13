@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:openrooms/home.dart';
-import 'package:openrooms/hourly_occupancy.dart';
 import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
 import 'package:openrooms/utils.dart';
