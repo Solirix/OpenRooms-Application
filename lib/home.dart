@@ -109,7 +109,7 @@ class _MyHomePageState extends State<HomePage> {
             children: <CupertinoListTile>[
               CupertinoListTile.notched(
                 key: const Key('tile1'),
-                title: const Text('Room 1', style: TextStyle(fontSize: 23)),
+                title: const Text('W214', style: TextStyle(fontSize: 23)),
                 subtitle: Text(HomeUtils.getRoomStatus(room1Value),
                     style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
@@ -130,8 +130,8 @@ class _MyHomePageState extends State<HomePage> {
                 onTap: () => navigateIfDataExists(room1Value, context, 'room1'),
               ),
               CupertinoListTile.notched(
-                key: const Key('tile2'),
-                title: const Text('Room 2', style: TextStyle(fontSize: 23)),
+                key: const Key('title2'),
+                title: const Text('W212', style: TextStyle(fontSize: 23)),
                 subtitle: Text(HomeUtils.getRoomStatus(room2Value),
                     style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
@@ -153,8 +153,9 @@ class _MyHomePageState extends State<HomePage> {
                 onTap: () => navigateIfDataExists(room2Value, context, 'room2'),
               ),
               CupertinoListTile.notched(
-                key: const Key('tile3'),
-                title: const Text('Room 3', style: TextStyle(fontSize: 23)),
+                key: const Key('title3'),
+                title: const Text('Conference Room',
+                    style: TextStyle(fontSize: 23)),
                 subtitle: Text(HomeUtils.getRoomStatus(room3Value),
                     style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
