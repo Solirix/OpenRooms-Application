@@ -131,7 +131,7 @@ class _MyHomePageState extends State<HomePage> {
               ),
               CupertinoListTile.notched(
                 key: const Key('title2'),
-                title: const Text('W212', style: TextStyle(fontSize: 23)),
+                title: const Text('W210', style: TextStyle(fontSize: 23)),
                 subtitle: Text(HomeUtils.getRoomStatus(room2Value),
                     style: const TextStyle(fontSize: 15)),
                 leading: SizedBox(
