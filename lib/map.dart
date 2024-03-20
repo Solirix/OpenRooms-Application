@@ -74,9 +74,9 @@ class _MapPageState extends State<MapPage> {
     if (roomValue == 'null') {
       return 'N'; // Null -> Offline
     } else if (roomValue == '0') {
-      return '1'; // 0 -> Available
+      return '0'; // 0 -> Available
     } else {
-      return '0'; // Occupied for all other values
+      return '1'; // Occupied for all other values
     }
   }
 
