@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:openrooms/home.dart';
 import 'package:openrooms/map.dart';
 import 'package:openrooms/settings.dart';
@@ -11,7 +12,7 @@ import 'package:openrooms/get_firebase_data.dart';
 
 /// Main entry point for the Open Rooms app:
 ///   This file sets up Firebase, theme management with `ThemeProvider`, and provides the main app structure
-///   with bottom navigation to switch between the Home, Map, and Settings pages. The FirebaseRoomService is 
+///   with bottom navigation to switch between the Home, Map, and Settings pages. The FirebaseRoomService is
 ///   initialized here and passed down to the necessary components for grabbing and displaying room data.
 ///
 /// Key Components:
@@ -28,7 +29,9 @@ import 'package:openrooms/get_firebase_data.dart';
 void main() async {
   // Ensures that widget binding is initialized before running the app.
   // This is necessary for plugins to work correctly in the async main function.
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Initializes Firebase with default options for the current platform.
   // This setup is required to use Firebase services in the app.
@@ -49,6 +52,7 @@ void main() async {
       child: const MyApp(), // MyApp is the root widget of the application.
     ),
   );
+  FlutterNativeSplash.remove();
 }
 
 /// Defines the root widget of the application, `MyApp`, which is a StatelessWidget.
@@ -67,14 +71,18 @@ class MyApp extends StatelessWidget {
     // Returns a CupertinoApp widget, setting up the overall app environment.
     // This includes the app's theme, title, and the navigation structure.
     return CupertinoApp(
-        debugShowCheckedModeBanner: false, // Hides the debug banner for a cleaner UI.
-        title: 'Open Rooms', // Sets the title of the app shown in the task switcher.
-        theme: themeProvider.getCupertinoTheme(), // Applies the current theme from ThemeProvider.
+        debugShowCheckedModeBanner:
+            false, // Hides the debug banner for a cleaner UI.
+        title:
+            'Open Rooms', // Sets the title of the app shown in the task switcher.
+        theme: themeProvider
+            .getCupertinoTheme(), // Applies the current theme from ThemeProvider.
         home: CupertinoTabBarBottom(
           // The main content of the app is a bottom navigation bar, defined in CupertinoTabBarBottom.
           // It passes a FirebaseRoomService instance to be used by child widgets.
           firebaseRoomService: FirebaseRoomService(
-            firebaseDatabase: FirebaseDatabase.instance, // Initializes FirebaseRoomService with the default Firebase instance.
+            firebaseDatabase: FirebaseDatabase
+                .instance, // Initializes FirebaseRoomService with the default Firebase instance.
           ),
         ));
   }
