@@ -27,10 +27,10 @@ class HourlyOccupancy extends StatefulWidget {
 class _HourlyOccupancyState extends State<HourlyOccupancy> {
   DateTime? selectedDate;
   CalendarFormat calendarFormat = CalendarFormat.month;
-  //final TextEditingController _calendarController = TextEditingController();
   bool showCalendar = false; // Added variable to control calendar visibility
   Map<int, String>? occupancyData; // Variable to hold occupancy data
-  StreamSubscription<Map<int, String>>? occupancyDataSubscription;
+  StreamSubscription<Map<int, String>>?
+      occupancyDataSubscription; // Subscription to the occupancy data stream
 
   @override
   void initState() {
@@ -48,16 +48,16 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
     widget.firebaseRoomService
         .getOccupancyDataForDateAndRoom(formattedDate, widget.roomId)
         .listen((hourData) {
+      // Update the state with the new occupancy data
       if (mounted) {
         setState(() {
           occupancyData = hourData;
         });
       }
-    }, onError: (error) {
-      print("Error fetching occupancy data: $error");
     });
   }
 
+  // Cancel the subscription when the widget is disposed
   @override
   void dispose() {
     occupancyDataSubscription?.cancel();
@@ -80,7 +80,6 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
             padding: const EdgeInsets.only(top: 30),
             child: Column(
               children: [
-                // Your existing code for displaying the date picker...
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -150,7 +149,7 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
                     ),
                   ),
 
-                // Replace the ListView.builder with the scatter chart
+                // Display the hourly occupancy data
                 Container(
                   height: 1000,
                   padding: const EdgeInsets.all(20.0),
@@ -211,6 +210,7 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
     ));
   }
 
+  // Function to get the color based on the status
   Color getStatusColor(String status) {
     switch (status) {
       case 'available':
@@ -223,18 +223,19 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
     }
   }
 
+  // Generate the ScatterSpots from the occupancy data
   List<ScatterSpot> _generateSpotsFromData() {
     return occupancyData?.keys.map((hour) {
           final status = occupancyData![hour]!;
-          // Match the color based on the status
-          final color = OccupancyUtils.getStatusColor(status);
+          final color = OccupancyUtils.getStatusColor(
+              status); // Match the color based on the status
           const radius = 8.0;
           const xValue =
               0.0; // Set a constant x-axis value since we are not using it
           // Create a new ScatterSpot with the given color and radius
           return ScatterSpot(
             xValue,
-            hour.toDouble(), // Y value as the x-axis value for the horizontal line
+            hour.toDouble(), // Use the hour as the y-axis value
             dotPainter: FlDotCirclePainter(color: color, radius: radius),
           );
         }).toList() ??

@@ -77,32 +77,7 @@ void main() {
       (tester) async {
     final mockService = MockFirebaseRoomService();
     const String roomId = 'room1';
-    // when(mockService.getOccupancyDataForDateAndRoom('2024-02-29', 'room1'))
-    //     .thenAnswer((_) => Stream.fromIterable([
-    //           {
-    //             0: 'available',
-    //             1: 'available',
-    //             2: 'available',
-    //             3: 'available',
-    //             4: 'available',
-    //             5: 'available',
-    //             9: 'available',
-    //             10: 'available',
-    //             11: 'available',
-    //             12: 'available',
-    //             13: 'available',
-    //             14: 'available',
-    //             15: 'available',
-    //             16: 'available',
-    //             17: 'available',
-    //             18: 'available',
-    //             19: 'available',
-    //             20: 'available',
-    //             21: 'available',
-    //             22: 'available',
-    //             23: 'available'
-    //           }
-    //         ]));
+
     // navigate to the tab widget
     await tester.pumpWidget(CupertinoApp(
       home: HourlyOccupancy(roomId: roomId, firebaseRoomService: mockService),

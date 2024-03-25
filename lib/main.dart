@@ -31,6 +31,7 @@ void main() async {
   // This is necessary for plugins to work correctly in the async main function.
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
+  // Configures the splash screen to wait for the app to load before disappearing.
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Initializes Firebase with default options for the current platform.

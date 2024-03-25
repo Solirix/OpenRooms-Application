@@ -5,18 +5,9 @@ import 'package:mockito/mockito.dart';
 import 'package:openrooms/get_firebase_data.dart';
 import 'package:openrooms/utils.dart';
 
-/// This test file is focused on verifying the dynamic UI updates of room availability indicators
-/// within the OpenRooms app. It employs widget testing to ensure that the HomePage correctly displays
-/// the availability status ('Available', 'Unavailable', 'Offline') for rooms based on the data provided
-/// by the FirebaseRoomService. The use of the 'mockito' package allows for simulating Firebase service
-/// responses without actual network calls.
-///
-/// Key Test Scenarios:
-/// - Mock responses are set up for three rooms with distinct availability states: available, unavailable, and offline.
-/// - The HomePage widget is rendered with these mocked responses, and the test checks if each room's availability
-///   status is displayed as expected.
-/// - This ensures that the app's UI accurately reflects the current state of room availability to the user.
+// This test case verifies each room's subtitle is correct based on its status
 
+// Create a mock class for FirebaseRoomService that returns predefined values
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
   @override
   Stream<String> getRoomValueStream(String roomId) {
@@ -48,47 +39,11 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    // if roomvalue is 0, expect to find 'Available' subtitle
     expect(HomeUtils.getRoomStatus('0'), equals('Available'));
+    // if roomvalue is 1, expect to find 'Unavailable' subtitle
     expect(HomeUtils.getRoomStatus('1'), equals('Unavailable'));
+    // if roomvalue is null, expect to find 'Offline' subtitle
     expect(HomeUtils.getRoomStatus('null'), equals('Offline'));
-
-    //   //expect room1 subtitle to be 'Available'
-    //   expect(
-    //     find.byWidgetPredicate(
-    //       (widget) =>
-    //           widget is CupertinoListTile &&
-    //           widget.title is Text &&
-    //           (widget.title as Text).data == 'Room 1' &&
-    //           widget.subtitle is Text &&
-    //           (widget.subtitle as Text).data == 'Available',
-    //     ),
-    //     findsOneWidget,
-    //   );
-
-    //   //expect room2 subtitle to be 'Unavailable'
-    //   expect(
-    //     find.byWidgetPredicate(
-    //       (widget) =>
-    //           widget is CupertinoListTile &&
-    //           widget.title is Text &&
-    //           (widget.title as Text).data == 'Room 2' &&
-    //           widget.subtitle is Text &&
-    //           (widget.subtitle as Text).data == 'Unavailable',
-    //     ),
-    //     findsOneWidget,
-    //   );
-
-    //   //expect room3 subtitle to be 'Offline'
-    //   expect(
-    //     find.byWidgetPredicate(
-    //       (widget) =>
-    //           widget is CupertinoListTile &&
-    //           widget.title is Text &&
-    //           (widget.title as Text).data == 'Room 3' &&
-    //           widget.subtitle is Text &&
-    //           (widget.subtitle as Text).data == 'Offline',
-    //     ),
-    //     findsOneWidget,
-    //   );
   });
 }
