@@ -113,8 +113,11 @@ Future<void> loadSavedTheme() async {
   final themeIndex = prefs.getInt('themeMode'); // Retrieve the saved theme index
   if (themeIndex != null) {
     toggleTheme(ThemeMode.values[themeIndex]); // Toggle the theme based on the saved index
+  } else {
+    toggleTheme(ThemeMode.system); // Explicitly default to system theme if no saved preference
   }
 }
+
 
   // Future method to get the saved theme mode from SharedPreferences
 Future<ThemeMode> getSavedTheme() async {
