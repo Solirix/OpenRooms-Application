@@ -5,9 +5,7 @@ import 'package:openrooms/home.dart';
 import 'package:openrooms/main.dart';
 import 'package:openrooms/get_firebase_data.dart';
 
-/// This Dart file is dedicated to widget UI testing on the interaction with the home icon and verifying its functionality. 
-/// It utilizes the `flutter_test` package for testing and `mockito` for mocking dependencies, ensuring isolated and reliable tests.
-
+// This test case verifies that the home icon can be found and clicked
 
 // Create a mock class for FirebaseRoomService that returns predefined values since the values are not important for this test
 class MockFirebaseRoomService extends Mock implements FirebaseRoomService {
@@ -25,8 +23,7 @@ void main() {
     // Create a mock FirebaseRoomService
     final mockService = MockFirebaseRoomService();
 
-    // Configure mock service to return a stream of 'null' values for room1, room2, and room3.
-    // This simulates the scenario where room value streams are accessed but no specific data is needed for the test.
+    // Configure mock service to return a stream of 'null' values for room1, room2, and room3
     when(mockService.getRoomValueStream('room1'))
         .thenAnswer((_) => Stream.fromIterable(['null']));
     when(mockService.getRoomValueStream('room2'))

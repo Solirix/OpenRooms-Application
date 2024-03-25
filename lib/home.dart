@@ -50,12 +50,10 @@ class _MyHomePageState extends State<HomePage> {
         });
       }
 
-      // The following subscriptions are set up after the first launch check,
-      // which is correct as these operations are not immediately related to the UI rendering.
+      // Set up listeners to update room status in real-time
       _subscriptionRoom1 = widget.firebaseRoomService
           .getRoomValueStream('room1')
           .listen((value) {
-        //print('Room 1 Changed at ${value.timestamp}');
         setState(() => room1Value = value);
       });
 
@@ -73,9 +71,9 @@ class _MyHomePageState extends State<HomePage> {
     });
   }
 
+  // Stops listening to room updates to avoid unnecessary work and free up resources
   @override
   void dispose() {
-    // Stops listening to room updates to avoid unnecessary work and free up resources.
     _subscriptionRoom1?.cancel();
     _subscriptionRoom2?.cancel();
     _subscriptionRoom3?.cancel();
