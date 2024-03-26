@@ -72,7 +72,7 @@ class _HourlyOccupancyState extends State<HourlyOccupancy> {
     return Material(
         child: CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Hourly Occupancy', style: TextStyle(fontSize: 30)),
+        middle: Text('Historical Data', style: TextStyle(fontSize: 30)),
       ),
       child: SafeArea(
         child: SingleChildScrollView(
