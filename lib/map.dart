@@ -25,7 +25,7 @@ class _MapPageState extends State<MapPage> {
   String room1Value = 'null';
   String room2Value = 'null';
   String room3Value = 'null';
-  late String mapImageName;
+  late String mapImageName = 'mapNNN.png';
 
   late StreamSubscription<String> _subscriptionRoom1;
   late StreamSubscription<String> _subscriptionRoom2;
