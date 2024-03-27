@@ -23,152 +23,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _MyHomePageState();
 }
 
-// class _MyHomePageState extends State<HomePage> {
-//   String room1Value = 'null';
-//   String room2Value = 'null';
-//   String room3Value = 'null';
-
-//   StreamSubscription<String>? _subscriptionRoom1;
-//   StreamSubscription<String>? _subscriptionRoom2;
-//   StreamSubscription<String>? _subscriptionRoom3;
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//       // Set up listeners to update room status in real-time
-//       _subscriptionRoom1 = widget.firebaseRoomService
-//           .getRoomValueStream('room1')
-//           .listen((value) {
-//         setState(() => room1Value = value);
-//       });
-
-//       _subscriptionRoom2 = widget.firebaseRoomService
-//           .getRoomValueStream('room2')
-//           .listen((value) {
-//         setState(() => room2Value = value);
-//       });
-
-//       _subscriptionRoom3 = widget.firebaseRoomService
-//           .getRoomValueStream('room3')
-//           .listen((value) {
-//         setState(() => room3Value = value);
-//       });
-//     });
-//   }
-
-//   // Stops listening to room updates to avoid unnecessary work and free up resources
-//   @override
-//   void dispose() {
-//     _subscriptionRoom1?.cancel();
-//     _subscriptionRoom2?.cancel();
-//     _subscriptionRoom3?.cancel();
-//     super.dispose();
-//   }
-
-//   //navigate to the hourly occupancy page if the room is not offline
-//   void navigateIfDataExists(
-//       String? roomValue, BuildContext context, String roomId) {
-//     if (roomValue != "null") {
-//       Navigator.of(context).push(
-//         CupertinoPageRoute<void>(
-//           builder: (BuildContext context) {
-//             return HourlyOccupancy(
-//                 roomId: roomId,
-//                 firebaseRoomService: widget.firebaseRoomService);
-//           },
-//         ),
-//       );
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return CupertinoPageScaffold(
-//         navigationBar: const CupertinoNavigationBar(
-//           middle: Text('Home', style: TextStyle(fontSize: 30)),
-//         ),
-//         child: SafeArea(
-//           child: CupertinoListSection.insetGrouped(
-//             children: <CupertinoListTile>[
-//               CupertinoListTile.notched(
-//                 key: const Key('tile1'),
-//                 title: const Text('W210', style: TextStyle(fontSize: 23)),
-//                 subtitle: Text(HomeUtils.getRoomStatus(room1Value),
-//                     style: const TextStyle(fontSize: 15)),
-//                 leading: SizedBox(
-//                   width: double.infinity,
-//                   height: double.infinity,
-//                   child: ClipRRect(
-//                     borderRadius: BorderRadius.circular(15.0),
-//                     child: Container(
-//                       key: const Key('room1'),
-//                       width: 25.0,
-//                       height: 25.0,
-//                       color: HomeUtils.getRoomColor(
-//                           room1Value), //Sets color to appropriate value based on data pulled from firebase
-//                     ),
-//                   ),
-//                 ),
-//                 additionalInfo: createRoomAdditionalInfo(room1Value),
-//                 onTap: () => navigateIfDataExists(room1Value, context, 'room1'),
-//               ),
-//               CupertinoListTile.notched(
-//                 key: const Key('title2'),
-//                 title: const Text('W211', style: TextStyle(fontSize: 23)),
-//                 subtitle: Text(HomeUtils.getRoomStatus(room2Value),
-//                     style: const TextStyle(fontSize: 15)),
-//                 leading: SizedBox(
-//                   width: double.infinity,
-//                   height: double.infinity,
-//                   child: ClipRRect(
-//                     borderRadius: BorderRadius.circular(15.0),
-//                     child: Container(
-//                       key: const Key('room2'),
-//                       width: 25.0,
-//                       height: 25.0,
-//                       color: HomeUtils.getRoomColor(
-//                           room2Value), //Sets color to appropriate value based on data pulled from firebase
-//                     ),
-//                   ),
-//                 ),
-//                 //additionalInfo: const Text('Not available'),
-//                 additionalInfo: createRoomAdditionalInfo(room2Value),
-//                 onTap: () => navigateIfDataExists(room2Value, context, 'room2'),
-//               ),
-//               CupertinoListTile.notched(
-//                 key: const Key('title3'),
-//                 title: const Text('W214', style: TextStyle(fontSize: 23)),
-//                 subtitle: Text(HomeUtils.getRoomStatus(room3Value),
-//                     style: const TextStyle(fontSize: 15)),
-//                 leading: SizedBox(
-//                   width: double.infinity,
-//                   height: double.infinity,
-//                   child: ClipRRect(
-//                     borderRadius: BorderRadius.circular(15.0),
-//                     child: Container(
-//                       key: const Key('room3'),
-//                       width: 25.0,
-//                       height: 25.0,
-//                       color: HomeUtils.getRoomColor(
-//                           room3Value), //Sets color to appropriate value based on data pulled from firebase
-//                     ),
-//                   ),
-//                 ),
-//                 additionalInfo: createRoomAdditionalInfo(room3Value),
-//                 onTap: () => navigateIfDataExists(room3Value, context, 'room3'),
-//               ),
-//             ],
-//           ),
-//         ));
-//   }
-// }
-
 class _MyHomePageState extends State<HomePage> {
   String room1Value = 'null';
   String room2Value = 'null';
   String room3Value = 'null';
 
+  // Subscriptions to listen for real-time updates from Firebase
   StreamSubscription<String>? _subscriptionRoom1;
   StreamSubscription<String>? _subscriptionRoom2;
   StreamSubscription<String>? _subscriptionRoom3;
@@ -219,6 +79,7 @@ class _MyHomePageState extends State<HomePage> {
     }
   }
 
+  // Creates a CupertinoListTile widget to display the rooms and their availability status.
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
