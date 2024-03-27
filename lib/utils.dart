@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+// This file contains utility functions that are used across multiple pages in the Open Rooms app.
+
 // function for occupancy page to get color by using status
 class OccupancyUtils {
   static Color getStatusColor(String status) {
@@ -39,6 +41,7 @@ class HomeUtils {
   }
 }
 
+// widget for additional info in home page
 Widget? createRoomAdditionalInfo(String? roomValue) {
   if (roomValue == "null") {
     return null;
