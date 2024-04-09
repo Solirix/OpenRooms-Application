@@ -18,11 +18,11 @@ void main() {
     final mockService = MockFirebaseRoomService();
 
     when(mockService.getRoomValueStream('room1'))
-        .thenAnswer((_) => Stream.fromIterable(['0']));
+        .thenAnswer((_) => Stream.fromIterable(['1']));
     when(mockService.getRoomValueStream('room2'))
-        .thenAnswer((_) => Stream.fromIterable(['5']));
+        .thenAnswer((_) => Stream.fromIterable(['1']));
     when(mockService.getRoomValueStream('room3'))
-        .thenAnswer((_) => Stream.fromIterable(['null']));
+        .thenAnswer((_) => Stream.fromIterable(['0']));
 
     await tester.pumpWidget(CupertinoApp(
       home: MapPage(firebaseRoomService: mockService),
@@ -35,6 +35,6 @@ void main() {
     final Image image = tester.widget(imageFinder) as Image;
     expect(imageFinder, findsOneWidget);
     expect(
-        (image.image as AssetImage).assetName, 'lib/assets/images/map01N.png');
+        (image.image as AssetImage).assetName, 'lib/assets/images/map000.png');
   });
 }
