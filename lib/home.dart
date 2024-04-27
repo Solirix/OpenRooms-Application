@@ -27,11 +27,14 @@ class _MyHomePageState extends State<HomePage> {
   String room1Value = 'null';
   String room2Value = 'null';
   String room3Value = 'null';
+  String room4Value = 'null';
 
   // Subscriptions to listen for real-time updates from Firebase
   StreamSubscription<String>? _subscriptionRoom1;
   StreamSubscription<String>? _subscriptionRoom2;
   StreamSubscription<String>? _subscriptionRoom3;
+  StreamSubscription<String>? _subscriptionRoom4;
+
 
   @override
   void initState() {
@@ -52,6 +55,11 @@ class _MyHomePageState extends State<HomePage> {
         widget.firebaseRoomService.getRoomValueStream('room3').listen((value) {
       setState(() => room3Value = value);
     });
+    
+    _subscriptionRoom4 =
+        widget.firebaseRoomService.getRoomValueStream('room4').listen((value) {
+      setState(() => room4Value = value);
+    });
   }
 
   // Stops listening to room updates to avoid unnecessary work and free up resources
@@ -60,6 +68,7 @@ class _MyHomePageState extends State<HomePage> {
     _subscriptionRoom1?.cancel();
     _subscriptionRoom2?.cancel();
     _subscriptionRoom3?.cancel();
+    _subscriptionRoom4?.cancel();
     super.dispose();
   }
 
@@ -155,6 +164,28 @@ class _MyHomePageState extends State<HomePage> {
                 ),
                 additionalInfo: createRoomAdditionalInfo(room3Value),
                 onTap: () => navigateIfDataExists(room3Value, context, 'room3'),
+              ),
+              CupertinoListTile.notched(
+                key: const Key('title4'),
+                title: const Text('Luparello', style: TextStyle(fontSize: 23)),
+                subtitle: Text(HomeUtils.getRoomStatus(room4Value),
+                    style: const TextStyle(fontSize: 15)),
+                leading: SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(
+                      key: const Key('room4'),
+                      width: 25.0,
+                      height: 25.0,
+                      color: HomeUtils.getRoomColor(
+                          room4Value), //Sets color to appropriate value based on data pulled from firebase
+                    ),
+                  ),
+                ),
+                additionalInfo: createRoomAdditionalInfo(room4Value),
+                onTap: () => navigateIfDataExists(room4Value, context, 'room4'),
               ),
             ],
           ),
